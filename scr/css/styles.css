@@ -91,8 +91,8 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    padding-top: 80px;
-    /* Adjusted for a smaller margin below the header */
+    padding-top: 120px;
+    /* Increased top padding for bigger margin below the header */
     padding-left: 15px;
     color: white;
     overflow-y: auto;
@@ -101,31 +101,11 @@ header {
 }
 
 /* Title of the Filter section */
-.filter-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    font-size: 16px;
-    /* Smaller font size for Filters */
-    margin-bottom: 5px;
-    /* Smaller margin between Filters and header */
-    margin-top: 10px;
-    /* Added top margin of 10px */
-    font-weight: normal;
-    /* Set font-weight to normal to reduce boldness */
-}
-
 .filter-title h2 {
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
     margin: 0;
-}
-
-.filter-title i {
-    font-size: 16px;
-    /* Size of the arrow icon */
-    transition: transform 0.3s ease;
-    margin-left: 10px;
-    /* Small margin between text and arrow */
 }
 
 /* Sidebar Filter Options */
