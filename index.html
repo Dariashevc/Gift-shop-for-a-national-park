@@ -4,86 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>National Park Gift Shop</title>
-
-    <!-- Link to external CSS file for styling -->
+    <title>Gift Shop</title>
     <link rel="stylesheet" href="./scr/css/styles.css">
-
-    <!-- Link to external JavaScript file for functionality -->
     <script src="./scr/js/script.js" defer></script>
-
-    <!-- FontAwesome for icons -->
     <script src="https://kit.fontawesome.com/2506a7edf1.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <!-- Sidebar Filter Section -->
-    <nav class="side-nav">
-        <h2>Filters</h2> <!-- Changed "Filter Products" to "Filters" -->
-
-        <!-- Category Filter -->
-        <div class="filter-section">
-            <h3>Category</h3>
-            <label><input type="checkbox" name="category" value="hats"> Hats</label>
-            <label><input type="checkbox" name="category" value="tshirts"> T-Shirts</label>
-            <label><input type="checkbox" name="category" value="cups"> Cups</label>
-            <label><input type="checkbox" name="category" value="toys"> Toys</label>
-        </div>
-
-        <!-- Color Filter -->
-        <div class="filter-section">
-            <h3>Color</h3>
-            <label><input type="checkbox" name="color" value="red"> Red</label>
-            <label><input type="checkbox" name="color" value="blue"> Blue</label>
-            <label><input type="checkbox" name="color" value="green"> Green</label>
-            <label><input type="checkbox" name="color" value="black"> Black</label>
-        </div>
-
-        <!-- Price Filter -->
-        <div class="filter-section">
-            <h3>Price</h3>
-            <input type="range" id="price-range" min="0" max="100" step="5" value="50"
-                oninput="updatePriceValue(this.value)">
-            <p>Max Price: $<span id="price-value">50</span></p>
-        </div>
-
-        <!-- Size Filter -->
-        <div class="filter-section">
-            <h3>Size</h3>
-            <label><input type="radio" name="size" value="small"> Small</label>
-            <label><input type="radio" name="size" value="medium"> Medium</label>
-            <label><input type="radio" name="size" value="large"> Large</label>
-        </div>
-
-        <!-- Apply Filters Button -->
-        <button onclick="applyFilters()">Apply Filters</button>
-    </nav>
-
-    <!-- Header section, which remains sticky at the top of the page -->
     <header>
-        <!-- Logo that links to the main page -->
         <div class="logo">
-            <a href="index.html">
-                <i class="fas fa-tree"></i> National Park Gift Shop
-            </a>
+            <a href="index.html"><i class="fas fa-tree"></i> National Park Gift Shop</a>
         </div>
-
-        <!-- Search container to center the search bar -->
         <div class="search-container">
             <div class="search-bar">
                 <input type="text" id="search" placeholder="Search for products...">
-                <button onclick="searchProducts()">
-                    <i class="fas fa-search"></i>
-                </button>
+                <button onclick="searchProducts()"><i class="fas fa-search"></i></button>
             </div>
         </div>
-
-        <!-- Icons section for favorite items and shopping cart -->
         <div class="icons">
-            <i class="fas fa-heart"></i> <!-- Favorite items icon -->
-            <i class="fas fa-shopping-cart"></i> <!-- Shopping cart icon -->
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-shopping-cart"></i>
         </div>
     </header>
+
+    <!-- Sidebar Filter Section -->
+    <div id="side-nav" class="side-nav">
+        <!-- Filter Title with Toggle Arrow -->
+        <div class="filter-title" onclick="toggleFilter()">
+            <h2>Filters</h2>
+            <i id="toggle-arrow" class="fas fa-chevron-down"></i>
+        </div>
+        <div id="filter-options" class="filter-options">
+            <h3>Categories</h3>
+            <div class="filter-section">
+                <label><input type="checkbox"> Hats</label>
+                <label><input type="checkbox"> T-shirts</label>
+                <label><input type="checkbox"> Cups</label>
+                <label><input type="checkbox"> Toys</label>
+            </div>
+
+            <h3>Colors</h3>
+            <div class="filter-section">
+                <label><input type="checkbox"> Red</label>
+                <label><input type="checkbox"> Blue</label>
+                <label><input type="checkbox"> Green</label>
+                <label><input type="checkbox"> Black</label>
+            </div>
+
+            <h3>Size</h3>
+            <div class="filter-section">
+                <label><input type="checkbox"> Small</label>
+                <label><input type="checkbox"> Medium</label>
+                <label><input type="checkbox"> Large</label>
+                <label><input type="checkbox"> X-Large</label>
+            </div>
+
+            <h3>Price Range</h3>
+            <div class="filter-section">
+                <input type="range" id="price-range" min="0" max="100" value="50">
+                <span>$0 - $100</span>
+            </div>
+
+            <button>Apply Filters</button>
+        </div>
+    </div>
 </body>
 
 </html>

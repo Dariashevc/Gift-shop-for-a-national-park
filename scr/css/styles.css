@@ -19,6 +19,7 @@ header {
     /* Increased header height */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
+    box-sizing: border-box;
 }
 
 /* Logo Styling */
@@ -71,6 +72,8 @@ header {
 .icons {
     display: flex;
     gap: 15px;
+    align-items: center;
+    /* Ensures icons are aligned vertically */
 }
 
 .icons i {
@@ -81,32 +84,57 @@ header {
 
 /* Sidebar Filter Section */
 .side-nav {
-    width: 220px;
+    width: 80px;
+    /* Initially collapsed to show only "Filters" */
     height: 100vh;
     background-color: #5a855a;
     position: fixed;
     top: 0;
     left: 0;
-    padding-top: 100px;
-    /* Adjusted for the header */
+    padding-top: 80px;
+    /* Adjusted for a smaller margin below the header */
     padding-left: 15px;
     color: white;
     overflow-y: auto;
+    transition: width 0.3s ease;
+    /* Smooth transition when expanding and collapsing */
 }
 
-/* Sidebar Headings */
-.side-nav h2 {
-    font-size: 22px;
-    margin-bottom: 15px;
-    text-align: center;
+/* Title of the Filter section */
+.filter-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    /* Smaller font size for Filters */
+    margin-bottom: 5px;
+    /* Smaller margin between Filters and header */
+    margin-top: 10px;
+    /* Added top margin of 10px */
+    font-weight: normal;
+    /* Set font-weight to normal to reduce boldness */
 }
 
-.side-nav h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
+.filter-title h2 {
+    margin: 0;
 }
 
-/* Filter Section Styles */
+.filter-title i {
+    font-size: 16px;
+    /* Size of the arrow icon */
+    transition: transform 0.3s ease;
+    margin-left: 10px;
+    /* Small margin between text and arrow */
+}
+
+/* Sidebar Filter Options */
+.filter-options {
+    display: none;
+    /* Hidden initially */
+    padding-left: 10px;
+}
+
 .filter-section {
     margin-bottom: 20px;
 }

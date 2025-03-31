@@ -1,31 +1,22 @@
-// Function to update the displayed price value
-function updatePriceValue(value) {
-    document.getElementById("price-value").textContent = value;
+// Toggle the sidebar to show and hide filter options and toggle arrow direction
+function toggleFilter() {
+    var filterOptions = document.getElementById("filter-options");
+    var sideNav = document.getElementById("side-nav");
+    var arrow = document.getElementById("toggle-arrow");
+    
+    // Toggle the display of the filter options
+    if (filterOptions.style.display === "none") {
+        filterOptions.style.display = "block";
+        sideNav.style.width = "220px"; // Show full sidebar
+        arrow.classList.remove("fa-chevron-down");
+        arrow.classList.add("fa-chevron-up"); // Change arrow direction
+    } else {
+        filterOptions.style.display = "none";
+        sideNav.style.width = "80px"; // Collapse sidebar to just show Filters
+        arrow.classList.remove("fa-chevron-up");
+        arrow.classList.add("fa-chevron-down"); // Change arrow direction
+    }
 }
 
-// Function to apply filters (Can be expanded later to filter actual products)
-function applyFilters() {
-    const selectedCategories = [];
-    document.querySelectorAll('input[name="category"]:checked').forEach((checkbox) => {
-        selectedCategories.push(checkbox.value);
-    });
-
-    const selectedColors = [];
-    document.querySelectorAll('input[name="color"]:checked').forEach((checkbox) => {
-        selectedColors.push(checkbox.value);
-    });
-
-    const selectedSize = document.querySelector('input[name="size"]:checked')?.value || "Any";
-    const maxPrice = document.getElementById("price-range").value;
-
-    console.log("Filters Applied:");
-    console.log("Categories:", selectedCategories);
-    console.log("Colors:", selectedColors);
-    console.log("Size:", selectedSize);
-    console.log("Max Price:", maxPrice);
-}
-
-// Function for search (to be implemented)
-function searchProducts() {
-    alert("Search function coming soon!");
-}
+// Set initial state to collapsed (only Filters visible)
+document.getElementById("filter-options").style.display = "none";
