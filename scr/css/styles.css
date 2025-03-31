@@ -16,7 +16,6 @@ header {
     top: 0;
     width: 100%;
     height: 80px;
-    /* Increased header height */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     box-sizing: border-box;
@@ -34,7 +33,6 @@ header {
 
 .logo i {
     margin-right: 10px;
-    /* Space between tree icon and text */
     font-size: 28px;
 }
 
@@ -73,7 +71,6 @@ header {
     display: flex;
     gap: 15px;
     align-items: center;
-    /* Ensures icons are aligned vertically */
 }
 
 .icons i {
@@ -85,19 +82,16 @@ header {
 /* Sidebar Filter Section */
 .side-nav {
     width: 80px;
-    /* Initially collapsed to show only "Filters" */
     height: 100vh;
     background-color: #5a855a;
     position: fixed;
     top: 0;
     left: 0;
-    padding-top: 120px;
-    /* Increased top padding for bigger margin below the header */
+    padding-top: 100px;
     padding-left: 15px;
     color: white;
     overflow-y: auto;
     transition: width 0.3s ease;
-    /* Smooth transition when expanding and collapsing */
 }
 
 /* Title of the Filter section */
@@ -105,13 +99,21 @@ header {
     text-align: center;
     cursor: pointer;
     font-size: 18px;
-    margin: 0;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Arrow styling */
+#filter-arrow {
+    transition: transform 0.3s ease;
+    font-size: 20px;
 }
 
 /* Sidebar Filter Options */
 .filter-options {
     display: none;
-    /* Hidden initially */
     padding-left: 10px;
 }
 
@@ -139,7 +141,6 @@ header {
     border: none;
     padding: 10px;
     width: calc(100% - 30px);
-    /* Ensures even margins */
     margin: 10px 15px;
     cursor: pointer;
     font-size: 16px;
@@ -147,4 +148,14 @@ header {
 
 .side-nav button:hover {
     background-color: #3c613c;
+}
+
+/* Expanded state for side-nav */
+.side-nav.expanded {
+    width: 220px;
+}
+
+/* Display when filter options are visible */
+#filter-options {
+    display: block;
 }
