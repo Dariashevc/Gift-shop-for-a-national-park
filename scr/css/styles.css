@@ -11,7 +11,8 @@ header {
     align-items: center;
     justify-content: space-between;
     background-color: #649463;
-    padding: 15px 20px;
+    padding: 15px 40px;
+    /* Increased padding on left and right */
     position: sticky;
     top: 0;
     width: 100%;
@@ -69,7 +70,8 @@ header {
 /* Icons on the Right */
 .icons {
     display: flex;
-    gap: 15px;
+    gap: 25px;
+    /* Increased gap between the icons */
     align-items: center;
 }
 
@@ -77,6 +79,11 @@ header {
     font-size: 22px;
     cursor: pointer;
     color: white;
+}
+
+.icons .fa-heart {
+    color: white;
+    /* Heart icon back to white */
 }
 
 /* Sidebar Filter Section */
@@ -87,8 +94,9 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    padding-top: 100px;
-    padding-left: 15px;
+    padding-top: 80px;
+    padding-left: 50px;
+    /* Significantly increased left padding */
     color: white;
     overflow-y: auto;
     transition: width 0.3s ease;
@@ -107,9 +115,7 @@ header {
 
 .filter-title i {
     margin-left: 5px;
-    /* Add some space between the text and the arrow */
-    padding-right: 10px;
-    /* Add padding to the right side of the arrow */
+    padding-right: 20px;
 }
 
 /* Arrow styling */
