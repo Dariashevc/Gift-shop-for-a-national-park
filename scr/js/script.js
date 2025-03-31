@@ -1,19 +1,22 @@
-// Function to toggle the filter section and expand/collapse sidebar
+// Function to toggle the filter options display
 function toggleFilter() {
-    var sideNav = document.getElementById("side-nav");
     var filterOptions = document.getElementById("filter-options");
-
-    // Toggle the display of the filter options and the sidebar width
+    var sideNav = document.getElementById("side-nav");
+    // Toggle the display of the filter options
     if (filterOptions.style.display === "none") {
         filterOptions.style.display = "block";
-        sideNav.style.width = "220px"; // Expand the sidebar
-        sideNav.classList.add("expanded");
+        sideNav.style.width = "220px"; // Show full sidebar
     } else {
         filterOptions.style.display = "none";
-        sideNav.style.width = "80px"; // Collapse the sidebar
-        sideNav.classList.remove("expanded");
+        sideNav.style.width = "80px"; // Collapse sidebar to just show Filters
     }
 }
 
-// Set initial state of filter options to hidden (collapsed sidebar)
-document.getElementById("filter-options").style.display = "none";
+// Function to update the price display dynamically
+function updatePrice() {
+    var price = document.getElementById("price-range").value;
+    document.getElementById("price-display").textContent = "$" + price;
+}
+
+// Set initial state to collapsed (only Filters visible)
+document.getElementById("filter-options").style.display = "none"; // Hide filter options initially

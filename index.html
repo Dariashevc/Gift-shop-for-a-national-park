@@ -31,7 +31,7 @@
     <!-- Sidebar Filter Section -->
     <div id="side-nav" class="side-nav">
         <div class="filter-title" onclick="toggleFilter()">
-            <h2>Filters <i class="fas fa-chevron-right" id="filter-arrow"></i></h2>
+            <h2>Filters <i id="filter-arrow" class="fas fa-chevron-right"></i></h2>
         </div>
         <div id="filter-options" class="filter-options">
             <h3>Categories</h3>
@@ -60,13 +60,14 @@
 
             <h3>Price Range</h3>
             <div class="filter-section">
-                <input type="range" id="price-range" min="0" max="100" value="50">
-                <span>$0 - $100</span>
+                <input type="range" id="price-range" min="0" max="100" value="50" oninput="updatePrice()"> Max
+                <span id="price-display">$50</span> <!-- Dynamic price display -->
             </div>
 
             <button>Apply Filters</button>
         </div>
     </div>
+
 </body>
 
 </html>
