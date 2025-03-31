@@ -94,8 +94,9 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    padding-top: 80px;
-    padding-left: 50px;
+    padding-top: 100px;
+    padding-left: 40px;
+    padding-right: 20px;
     /* Significantly increased left padding */
     color: white;
     overflow-y: auto;
@@ -107,14 +108,13 @@ header {
     text-align: center;
     cursor: pointer;
     font-size: 18px;
-    margin: 5px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .filter-title i {
-    margin-left: 5px;
+    margin-left: 10px;
     padding-right: 20px;
 }
 
