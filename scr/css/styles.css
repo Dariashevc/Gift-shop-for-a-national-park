@@ -30,6 +30,7 @@ header {
     text-decoration: none;
     display: flex;
     align-items: center;
+    margin-right: 20px;
 }
 
 .logo i {
@@ -73,17 +74,13 @@ header {
     gap: 25px;
     /* Increased gap between the icons */
     align-items: center;
+margin-left: 40px;
 }
 
 .icons i {
     font-size: 22px;
     cursor: pointer;
     color: white;
-}
-
-.icons .fa-heart {
-    color: white;
-    /* Heart icon back to white */
 }
 
 /* Sidebar Filter Section */
