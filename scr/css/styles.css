@@ -12,7 +12,6 @@ header {
     justify-content: space-between;
     background-color: #649463;
     padding: 15px 40px;
-    /* Increased padding on left and right */
     position: sticky;
     top: 0;
     width: 100%;
@@ -72,7 +71,6 @@ header {
 .icons {
     display: flex;
     gap: 25px;
-    /* Increased gap between the icons */
     align-items: center;
 margin-left: 40px;
 }
@@ -94,7 +92,6 @@ margin-left: 40px;
     padding-top: 80px;
     padding-left: 30px;
     padding-right: 20px;
-    /* Significantly increased left padding */
     color: white;
     overflow-y: auto;
     transition: width 0.3s ease;
