@@ -67,7 +67,6 @@ header {
     color: black;
 }
 
-/* Icons on the Right */
 .icons {
     display: flex;
     gap: 25px;
@@ -112,7 +111,6 @@ margin-left: 40px;
     padding-right: 20px;
 }
 
-/* Arrow styling */
 #filter-arrow {
     transition: transform 0.3s ease;
     font-size: 20px;
@@ -128,7 +126,6 @@ margin-left: 40px;
     margin-bottom: 20px;
 }
 
-/* Label Styles */
 .filter-section label {
     display: block;
     cursor: pointer;
@@ -157,12 +154,10 @@ margin-left: 40px;
     background-color: #3c613c;
 }
 
-/* Expanded state for side-nav */
 .side-nav.expanded {
     width: 220px;
 }
 
-/* Display when filter options are visible */
 #filter-options {
     display: block;
 }
