@@ -20,8 +20,13 @@ function updatePrice() {
 
 // Scroll to Shop Section
 function scrollToShop() {
-    document.getElementById('shop-section').scrollIntoView({ behavior: 'smooth' });
+    const shopSection = document.getElementById('shop-section');
+    const yOffset = -75; // offset for the sticky header
+    const y = shopSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({ top: y, behavior: 'smooth' });
 }
+
 
 // Slideshow Functionality
 let currentSlide = 0;
