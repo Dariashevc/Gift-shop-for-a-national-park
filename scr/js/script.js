@@ -1,3 +1,4 @@
+// Toggle Sidebar Filters
 function toggleFilter() {
     var filterOptions = document.getElementById("filter-options");
     var sideNav = document.getElementById("side-nav");
@@ -9,10 +10,31 @@ function toggleFilter() {
         sideNav.style.width = "80px";
     }
 }
+document.getElementById("filter-options").style.display = "none";
 
-// Function to update the price display dynamically
+// Price Range Display
 function updatePrice() {
     var price = document.getElementById("price-range").value;
     document.getElementById("price-display").textContent = "$" + price;
 }
-document.getElementById("filter-options").style.display = "none"; 
+
+// Scroll to Shop Section
+function scrollToShop() {
+    document.getElementById('shop-section').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Slideshow Functionality
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        if (i === index) slide.classList.add('active');
+    });
+}
+
+setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}, 4000);
