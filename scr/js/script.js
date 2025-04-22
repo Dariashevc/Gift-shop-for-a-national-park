@@ -43,3 +43,13 @@ setInterval(() => {
     currentSlide = (currentSlide + 1) % slides.length;
     showSlide(currentSlide);
 }, 4000);
+
+function addToCart() {
+    alert("Product added to cart!");
+    // Optional: add to localStorage or redirect
+}
+
+function addToFavorite() {
+    alert("Product added to favorites!");
+    // Optional: add to localStorage or redirect
+}
