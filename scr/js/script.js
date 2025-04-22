@@ -46,10 +46,8 @@ setInterval(() => {
 
 function addToCart() {
     alert("Product added to cart!");
-    // Optional: add to localStorage or redirect
 }
 
 function addToFavorite() {
     alert("Product added to favorites!");
-    // Optional: add to localStorage or redirect
 }
