@@ -88,37 +88,28 @@ heroContent.appendChild(heroHeading);
 heroContent.appendChild(heroButton);
 heroSection.appendChild(heroContent);
 
-// === Create Sidebar Filter ===
-const sideNav = document.createElement('div');
-sideNav.classList.add('side-nav');
-document.body.appendChild(sideNav);
+// === Horizontal Filter Bar and Modal ===
+const filterBar = document.createElement('div');
+filterBar.classList.add('filter-bar');
+const filterBtn = document.createElement('button');
+filterBtn.classList.add('filter-toggle-btn');
+filterBtn.innerHTML = 'Filters <i id="filter-arrow" class="fas fa-chevron-down"></i>';
+filterBar.appendChild(filterBtn);
+document.body.appendChild(filterBar);
 
-const filterTitle = document.createElement('div');
-filterTitle.classList.add('filter-title');
-const filterTitleH2 = document.createElement('h2');
-filterTitleH2.textContent = 'Filters';
-const filterArrow = document.createElement('i');
-filterArrow.classList.add('fas', 'fa-chevron-right');
-filterArrow.id = 'filter-arrow';
-filterTitleH2.appendChild(filterArrow);
-filterTitle.appendChild(filterTitleH2);
-sideNav.appendChild(filterTitle);
-
-// Expandable filters
-filterTitle.onclick = function () {
-    const options = document.querySelector('.filter-options');
-    options.style.display = options.style.display === 'block' ? 'none' : 'block';
-    sideNav.classList.toggle('expanded');
-    filterArrow.style.transform = options.style.display === 'block' ? 'rotate(90deg)' : 'rotate(0deg)';
-};
+const filterModal = document.createElement('div');
+filterModal.classList.add('filter-modal');
+filterModal.style.display = 'none';
+document.body.appendChild(filterModal);
 
 const filterOptions = document.createElement('div');
 filterOptions.classList.add('filter-options');
+filterModal.appendChild(filterOptions);
+
 const categories = ['Hats', 'T-shirts', 'Cups', 'Toys'];
 const colors = ['Red', 'Blue', 'Green', 'Black'];
 const sizes = ['Small', 'Medium', 'Large', 'X-Large'];
 
-// Helper to build filter sections
 function createFilterSection(title, items) {
     const sectionTitle = document.createElement('h3');
     sectionTitle.textContent = title;
@@ -140,7 +131,6 @@ createFilterSection('Categories', categories);
 createFilterSection('Colors', colors);
 createFilterSection('Size', sizes);
 
-// Price Range
 const priceSectionTitle = document.createElement('h3');
 priceSectionTitle.textContent = 'Price Range';
 const priceFilter = document.createElement('div');
@@ -161,18 +151,28 @@ priceFilter.appendChild(priceDisplay);
 filterOptions.appendChild(priceSectionTitle);
 filterOptions.appendChild(priceFilter);
 
-// Apply button
 const applyBtn = document.createElement('button');
 applyBtn.textContent = 'Apply Filters';
 filterOptions.appendChild(applyBtn);
-sideNav.appendChild(filterOptions);
+
+filterBtn.onclick = function () {
+    const arrow = document.getElementById('filter-arrow');
+    if (filterModal.style.display === 'none') {
+        filterModal.style.display = 'block';
+        arrow.classList.remove('fa-chevron-down');
+        arrow.classList.add('fa-chevron-up');
+    } else {
+        filterModal.style.display = 'none';
+        arrow.classList.remove('fa-chevron-up');
+        arrow.classList.add('fa-chevron-down');
+    }
+};
 
 // === Create Product List ===
 const productContainer = document.createElement('ul');
 productContainer.classList.add('product-container');
 document.body.appendChild(productContainer);
 
-// Sample product data
 const products = [
     { name: 'Cup 1', price: 25, img: './scr/images/cup1.jpg' },
     { name: 'T-shirt 1', price: 30, img: './scr/images/cup2.jpg' },
@@ -205,13 +205,11 @@ products.forEach(product => {
     productContainer.appendChild(item);
 });
 
-// === Price Range Display Function ===
 function updatePrice() {
     const value = document.getElementById('price-range').value;
     document.getElementById('price-display').textContent = `$${value}`;
 }
 
-// === Slideshow Rotation ===
 let currentSlide = 0;
 setInterval(() => {
     const allSlides = document.querySelectorAll('.slide');
