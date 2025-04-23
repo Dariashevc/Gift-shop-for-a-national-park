@@ -154,7 +154,7 @@ header {
     position: sticky;
     top: 80px;
     z-index: 999;
-    padding-left: 35px;
+    padding-left: 40px;
 }
 
 .filter-toggle-btn {
@@ -219,6 +219,7 @@ header {
     list-style-type: none;
     padding-top: 50px;
     padding-left: 40px;
+    padding-bottom: 60px;
     margin: 0;
     display: flex;
     flex-wrap: wrap;
