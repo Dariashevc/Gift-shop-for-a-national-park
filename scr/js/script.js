@@ -82,7 +82,7 @@ heroHeading.textContent = 'Bring the beautiful memories of nature home';
 const heroButton = document.createElement('button');
 heroButton.textContent = 'Go Shopping Now';
 heroButton.onclick = function () {
-    document.querySelector('.product-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelector('.filter-bar').scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 heroContent.appendChild(heroHeading);
 heroContent.appendChild(heroButton);
@@ -139,7 +139,7 @@ const priceRange = document.createElement('input');
 priceRange.type = 'range';
 priceRange.id = 'price-range';
 priceRange.min = '0';
-priceRange.max = '100';
+priceRange.max = '50';
 priceRange.value = '50';
 priceRange.oninput = function () { updatePrice(); };
 const priceDisplay = document.createElement('span');
@@ -174,11 +174,21 @@ productContainer.classList.add('product-container');
 document.body.appendChild(productContainer);
 
 const products = [
-    { name: 'Cup 1', price: 25, img: './scr/images/cup1.jpg' },
-    { name: 'T-shirt 1', price: 30, img: './scr/images/cup2.jpg' },
-    { name: 'Hat 1', price: 18, img: './scr/images/cup3.jpg' },
-    { name: 'Toy 1', price: 10, img: './scr/images/cup4.jpg' }
+  { name: 'Cup 1', price: 18, img: './scr/images/cup1.jpg' },
+  { name: 'Cup 2', price: 20, img: './scr/images/cup2.jpg' },
+  { name: 'Cup 3', price: 20, img: './scr/images/cup3.jpg' },
+    { name: 'Cup 4', price: 25, img: './scr/images/cup4.jpg' },
+      { name: 'Hat 1', price: 25, img: '../scr/images/hat1.jpg' },
+  { name: 'Hat 2', price: 35, img: './scr/images/hat2.jpg' },
+  { name: 'Hat 3', price: 30, img: './scr/images/hat3.jpg' },
+    { name: 'Toy 1', price: 40, img: './scr/images/toy1.jpg' },
+      { name: 'Toy 2', price: 45, img: './scr/images/toy2.jpg' },
+  { name: 'Toy 3', price: 45, img: './scr/images/toy3.jpg' },
+  { name: 'Toy 4', price: 40, img: './scr/images/toy4.jpg' },
+    { name: 'T-shirts', price: 15, img: './scr/images/red-tshirt.jpg' }
+  
 ];
+
 
 products.forEach(product => {
     const item = document.createElement('li');
