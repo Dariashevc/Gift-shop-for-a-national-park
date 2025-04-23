@@ -1,6 +1,4 @@
-// Create and append everything using JavaScript
-
-// Create Header
+// === Create Header ===
 const header = document.createElement('header');
 document.body.appendChild(header);
 
@@ -16,7 +14,7 @@ logoLink.innerHTML += ' National Park Gift Shop';
 logoDiv.appendChild(logoLink);
 header.appendChild(logoDiv);
 
-// Search container
+// Search
 const searchContainer = document.createElement('div');
 searchContainer.classList.add('search-container');
 const searchBar = document.createElement('div');
@@ -26,7 +24,9 @@ searchInput.type = 'text';
 searchInput.id = 'search';
 searchInput.placeholder = 'Search for products...';
 const searchButton = document.createElement('button');
-searchButton.onclick = function () { alert('Searching for: ' + searchInput.value); };
+searchButton.onclick = function () {
+    alert('Searching for: ' + searchInput.value);
+};
 const searchIcon = document.createElement('i');
 searchIcon.classList.add('fas', 'fa-search');
 searchButton.appendChild(searchIcon);
@@ -52,7 +52,7 @@ iconsDiv.appendChild(favoriteIcon);
 iconsDiv.appendChild(cartIcon);
 header.appendChild(iconsDiv);
 
-// Create Hero Section
+// === Create Hero Section ===
 const heroSection = document.createElement('section');
 heroSection.classList.add('hero-section');
 document.body.appendChild(heroSection);
@@ -69,7 +69,7 @@ slides.forEach((imgSrc, index) => {
     const slide = document.createElement('div');
     slide.classList.add('slide');
     slide.style.backgroundImage = `url(${imgSrc})`;
-    if (index === 0) slide.classList.add('active'); // Add 'active' class to first slide
+    if (index === 0) slide.classList.add('active');
     slideshow.appendChild(slide);
 });
 heroSection.appendChild(slideshow);
@@ -81,12 +81,14 @@ const heroHeading = document.createElement('h1');
 heroHeading.textContent = 'Bring the beautiful memories of nature home';
 const heroButton = document.createElement('button');
 heroButton.textContent = 'Go Shopping Now';
-heroButton.onclick = function () { alert('Scroll to Shop Section'); };
+heroButton.onclick = function () {
+    document.querySelector('.product-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
 heroContent.appendChild(heroHeading);
 heroContent.appendChild(heroButton);
 heroSection.appendChild(heroContent);
 
-// Create Sidebar Filter Section
+// === Create Sidebar Filter ===
 const sideNav = document.createElement('div');
 sideNav.classList.add('side-nav');
 document.body.appendChild(sideNav);
@@ -97,9 +99,18 @@ const filterTitleH2 = document.createElement('h2');
 filterTitleH2.textContent = 'Filters';
 const filterArrow = document.createElement('i');
 filterArrow.classList.add('fas', 'fa-chevron-right');
+filterArrow.id = 'filter-arrow';
 filterTitleH2.appendChild(filterArrow);
 filterTitle.appendChild(filterTitleH2);
 sideNav.appendChild(filterTitle);
+
+// Expandable filters
+filterTitle.onclick = function () {
+    const options = document.querySelector('.filter-options');
+    options.style.display = options.style.display === 'block' ? 'none' : 'block';
+    sideNav.classList.toggle('expanded');
+    filterArrow.style.transform = options.style.display === 'block' ? 'rotate(90deg)' : 'rotate(0deg)';
+};
 
 const filterOptions = document.createElement('div');
 filterOptions.classList.add('filter-options');
@@ -107,57 +118,31 @@ const categories = ['Hats', 'T-shirts', 'Cups', 'Toys'];
 const colors = ['Red', 'Blue', 'Green', 'Black'];
 const sizes = ['Small', 'Medium', 'Large', 'X-Large'];
 
-// Categories
-const categorySection = document.createElement('h3');
-categorySection.textContent = 'Categories';
-const categoryFilter = document.createElement('div');
-categoryFilter.classList.add('filter-section');
-categories.forEach(category => {
-    const label = document.createElement('label');
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    label.appendChild(checkbox);
-    label.appendChild(document.createTextNode(category));
-    categoryFilter.appendChild(label);
-});
-filterOptions.appendChild(categorySection);
-filterOptions.appendChild(categoryFilter);
+// Helper to build filter sections
+function createFilterSection(title, items) {
+    const sectionTitle = document.createElement('h3');
+    sectionTitle.textContent = title;
+    const section = document.createElement('div');
+    section.classList.add('filter-section');
+    items.forEach(item => {
+        const label = document.createElement('label');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(item));
+        section.appendChild(label);
+    });
+    filterOptions.appendChild(sectionTitle);
+    filterOptions.appendChild(section);
+}
 
-// Colors
-const colorSection = document.createElement('h3');
-colorSection.textContent = 'Colors';
-const colorFilter = document.createElement('div');
-colorFilter.classList.add('filter-section');
-colors.forEach(color => {
-    const label = document.createElement('label');
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    label.appendChild(checkbox);
-    label.appendChild(document.createTextNode(color));
-    colorFilter.appendChild(label);
-});
-filterOptions.appendChild(colorSection);
-filterOptions.appendChild(colorFilter);
-
-// Size
-const sizeSection = document.createElement('h3');
-sizeSection.textContent = 'Size';
-const sizeFilter = document.createElement('div');
-sizeFilter.classList.add('filter-section');
-sizes.forEach(size => {
-    const label = document.createElement('label');
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    label.appendChild(checkbox);
-    label.appendChild(document.createTextNode(size));
-    sizeFilter.appendChild(label);
-});
-filterOptions.appendChild(sizeSection);
-filterOptions.appendChild(sizeFilter);
+createFilterSection('Categories', categories);
+createFilterSection('Colors', colors);
+createFilterSection('Size', sizes);
 
 // Price Range
-const priceRangeSection = document.createElement('h3');
-priceRangeSection.textContent = 'Price Range';
+const priceSectionTitle = document.createElement('h3');
+priceSectionTitle.textContent = 'Price Range';
 const priceFilter = document.createElement('div');
 priceFilter.classList.add('filter-section');
 const priceRange = document.createElement('input');
@@ -173,23 +158,21 @@ priceDisplay.textContent = '$50';
 priceFilter.appendChild(priceRange);
 priceFilter.appendChild(document.createTextNode(' Max'));
 priceFilter.appendChild(priceDisplay);
-filterOptions.appendChild(priceRangeSection);
+filterOptions.appendChild(priceSectionTitle);
 filterOptions.appendChild(priceFilter);
 
-// Apply Filters Button
-const applyFiltersButton = document.createElement('button');
-applyFiltersButton.textContent = 'Apply Filters';
-filterOptions.appendChild(applyFiltersButton);
-
-// Append filter options to sidebar
+// Apply button
+const applyBtn = document.createElement('button');
+applyBtn.textContent = 'Apply Filters';
+filterOptions.appendChild(applyBtn);
 sideNav.appendChild(filterOptions);
 
-// Create Product List Section
+// === Create Product List ===
 const productContainer = document.createElement('ul');
 productContainer.classList.add('product-container');
 document.body.appendChild(productContainer);
 
-// Sample Products Data
+// Sample product data
 const products = [
     { name: 'Cup 1', price: 25, img: './scr/images/cup1.jpg' },
     { name: 'T-shirt 1', price: 30, img: './scr/images/cup2.jpg' },
@@ -198,32 +181,41 @@ const products = [
 ];
 
 products.forEach(product => {
-    const productItem = document.createElement('li');
-    productItem.classList.add('product-item');
-    const productImg = document.createElement('img');
-    productImg.src = product.img;
-    productImg.alt = product.name;
-    const productPrice = document.createElement('p');
-    productPrice.classList.add('product-price');
-    productPrice.textContent = `$${product.price}`;
-    const productButtons = document.createElement('div');
-    productButtons.classList.add('product-buttons');
-    const cartButton = document.createElement('button');
-    cartButton.onclick = function () { alert('Added to cart: ' + product.name); };
-    cartButton.innerHTML = '<i class="fas fa-shopping-cart"></i>';
-    const favoriteButton = document.createElement('button');
-    favoriteButton.onclick = function () { alert('Added to favorites: ' + product.name); };
-    favoriteButton.innerHTML = '<i class="fas fa-heart"></i>';
-    productButtons.appendChild(cartButton);
-    productButtons.appendChild(favoriteButton);
-    productItem.appendChild(productImg);
-    productItem.appendChild(productPrice);
-    productItem.appendChild(productButtons);
-    productContainer.appendChild(productItem);
+    const item = document.createElement('li');
+    item.classList.add('product-item');
+    const img = document.createElement('img');
+    img.src = product.img;
+    img.alt = product.name;
+    const price = document.createElement('p');
+    price.classList.add('product-price');
+    price.textContent = `$${product.price}`;
+    const btns = document.createElement('div');
+    btns.classList.add('product-buttons');
+    const cartBtn = document.createElement('button');
+    cartBtn.innerHTML = '<i class="fas fa-shopping-cart"></i>';
+    cartBtn.onclick = () => alert('Added to cart: ' + product.name);
+    const favBtn = document.createElement('button');
+    favBtn.innerHTML = '<i class="fas fa-heart"></i>';
+    favBtn.onclick = () => alert('Added to favorites: ' + product.name);
+    btns.appendChild(cartBtn);
+    btns.appendChild(favBtn);
+    item.appendChild(img);
+    item.appendChild(price);
+    item.appendChild(btns);
+    productContainer.appendChild(item);
 });
 
-// Price Range Update
+// === Price Range Display Function ===
 function updatePrice() {
-    const priceRangeValue = document.getElementById('price-range').value;
-    document.getElementById('price-display').textContent = `$${priceRangeValue}`;
+    const value = document.getElementById('price-range').value;
+    document.getElementById('price-display').textContent = `$${value}`;
 }
+
+// === Slideshow Rotation ===
+let currentSlide = 0;
+setInterval(() => {
+    const allSlides = document.querySelectorAll('.slide');
+    allSlides.forEach(slide => slide.classList.remove('active'));
+    currentSlide = (currentSlide + 1) % allSlides.length;
+    allSlides[currentSlide].classList.add('active');
+}, 4000);
