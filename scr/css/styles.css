@@ -73,7 +73,7 @@ header {
 }
 
 .icons i {
-    font-size: 22px;
+    font-size: 24px;
     cursor: pointer;
     color: white;
 }
@@ -280,8 +280,8 @@ footer.footer {
 }
 
 .footer .social-media a {
-    margin: 0 10px;
-    font-size: 24px;
+    margin: 0 15px;
+    font-size: 28px;
     color: white;
     text-decoration: none;
 }
