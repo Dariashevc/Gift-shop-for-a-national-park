@@ -260,8 +260,8 @@ footerLinks.classList.add('footer-links');
 const links = [
     { text: 'About Us', href: '#' },
     { text: 'Contact Us', href: '#' },
-    { text: 'Submit a Testimonial', href: '#' },
-    { text: 'Delivery Information', href: '#' }
+    { text: 'Delivery Information', href: '#' },
+        { text: 'Submit a Testimonial', href: '#' }
 ];
 
 links.forEach(linkObj => {
