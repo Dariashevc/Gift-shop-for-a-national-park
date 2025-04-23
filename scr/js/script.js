@@ -238,9 +238,9 @@ const socialMedia = document.createElement('div');
 socialMedia.classList.add('social-media');
 
 const socials = [
-    { href: 'https://facebook.com', icon: 'fab fa-facebook-f' },
-    { href: 'https://twitter.com', icon: 'fab fa-twitter' },
-    { href: 'https://instagram.com', icon: 'fab fa-instagram' }
+    { href: 'https://facebook.com', icon: 'fa-brands fa-facebook-f' },
+    { href: 'https://twitter.com', icon: 'fa-brands fa-twitter' },
+    { href: 'https://instagram.com', icon: 'fa-brands fa-instagram' }
 ];
 
 socials.forEach(s => {
