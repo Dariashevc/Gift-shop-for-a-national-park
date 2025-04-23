@@ -270,3 +270,36 @@ header {
 .product-buttons button:hover {
     background-color: #3c613c;
 }
+
+footer.footer {
+    background-color: #4a734a;
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.footer .social-media a {
+    margin: 0 10px;
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+}
+
+.footer .social-media a:hover {
+    color: #d1f1d1;
+}
+
+.footer-links {
+    margin-top: 20px;
+}
+
+.footer-links a {
+    display: block;
+    color: white;
+    margin: 5px 0;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}

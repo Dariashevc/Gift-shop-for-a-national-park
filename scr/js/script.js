@@ -227,3 +227,48 @@ setInterval(() => {
     currentSlide = (currentSlide + 1) % allSlides.length;
     allSlides[currentSlide].classList.add('active');
 }, 4000);
+
+// === Create Footer ===
+const footer = document.createElement('footer');
+footer.classList.add('footer');
+document.body.appendChild(footer);
+
+// Social Media Section
+const socialMedia = document.createElement('div');
+socialMedia.classList.add('social-media');
+
+const socials = [
+    { href: 'https://facebook.com', icon: 'fab fa-facebook-f' },
+    { href: 'https://twitter.com', icon: 'fab fa-twitter' },
+    { href: 'https://instagram.com', icon: 'fab fa-instagram' }
+];
+
+socials.forEach(s => {
+    const link = document.createElement('a');
+    link.href = s.href;
+    link.target = '_blank';
+    link.innerHTML = `<i class="${s.icon}"></i>`;
+    socialMedia.appendChild(link);
+});
+
+footer.appendChild(socialMedia);
+
+// Footer Links Section
+const footerLinks = document.createElement('div');
+footerLinks.classList.add('footer-links');
+
+const links = [
+    { text: 'About Us', href: '#' },
+    { text: 'Contact Us', href: '#' },
+    { text: 'Submit a Testimonial', href: '#' },
+    { text: 'Delivery Information', href: '#' }
+];
+
+links.forEach(linkObj => {
+    const link = document.createElement('a');
+    link.href = linkObj.href;
+    link.textContent = linkObj.text;
+    footerLinks.appendChild(link);
+});
+
+footer.appendChild(footerLinks);
