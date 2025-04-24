@@ -174,31 +174,45 @@ productContainer.classList.add('product-container');
 document.body.appendChild(productContainer);
 
 const products = [
-  { name: 'Cup 1', price: 18, img: './scr/images/cup1.jpg' },
-  { name: 'Cup 2', price: 20, img: './scr/images/cup2.jpg' },
-  { name: 'Cup 3', price: 20, img: './scr/images/cup3.jpg' },
-    { name: 'Cup 4', price: 25, img: './scr/images/cup4.jpg' },
-      { name: 'Hat 1', price: 25, img: '../scr/images/hat1.jpg' },
-  { name: 'Hat 2', price: 35, img: './scr/images/hat2.jpg' },
-  { name: 'Hat 3', price: 30, img: './scr/images/hat3.jpg' },
-    { name: 'Toy 1', price: 40, img: './scr/images/toy1.jpg' },
-      { name: 'Toy 2', price: 45, img: './scr/images/toy2.jpg' },
-  { name: 'Toy 3', price: 45, img: './scr/images/toy3.jpg' },
-  { name: 'Toy 4', price: 40, img: './scr/images/toy4.jpg' },
-    { name: 'T-shirts', price: 15, img: './scr/images/red-tshirt.jpg' }
-  
+  { name: 'Cup 1', price: 18, img: './scr/images/cup1.jpg', colors: ['black'] },
+  { name: 'Cup 2', price: 20, img: './scr/images/cup2.jpg', colors: ['#bdb157'] },
+  { name: 'Cup 3', price: 20, img: './scr/images/cup3.jpg', colors: ['black'] },
+  { name: 'Cup 4', price: 25, img: './scr/images/cup4.jpg', colors: ['white'] },
+  { name: 'Hat 1', price: 25, img: './scr/images/hat1.jpg', colors: ['#888cb5'] },
+  { name: 'Hat 2', price: 35, img: './scr/images/hat2.jpg', colors: ['#7a3140'] },
+  { name: 'Hat 3', price: 30, img: './scr/images/hat3.jpg', colors: ['#83b6c7'] },
+  { name: 'Toy 1', price: 40, img: './scr/images/toy1.jpg', colors: ['#806940'] },
+  { name: 'Toy 2', price: 45, img: './scr/images/toy2.jpg', colors: ['#b88135'] },
+  { name: 'Toy 3', price: 45, img: './scr/images/toy3.jpg', colors: ['grey'] },
+  { name: 'Toy 4', price: 40, img: './scr/images/toy4.jpg', colors: ['grey'] },
+  { name: 'T-shirts', price: 15, img: './scr/images/red-tshirt.jpg', colors: ['red', 'blue', 'green'] }
 ];
-
 
 products.forEach(product => {
     const item = document.createElement('li');
     item.classList.add('product-item');
+
     const img = document.createElement('img');
     img.src = product.img;
     img.alt = product.name;
+
+    // Create color buttons
+    const colorButtons = document.createElement('div');
+    colorButtons.classList.add('color-buttons');
+    
+    product.colors.forEach(color => {
+        const colorButton = document.createElement('button');
+        colorButton.style.backgroundColor = color;
+        colorButton.onclick = function () {
+            img.src = `./scr/images/${color}-${product.name.toLowerCase().replace(/\s+/g, '-')}.jpg`;
+        };
+        colorButtons.appendChild(colorButton);
+    });
+
     const price = document.createElement('p');
     price.classList.add('product-price');
     price.textContent = `$${product.price}`;
+
     const btns = document.createElement('div');
     btns.classList.add('product-buttons');
     const cartBtn = document.createElement('button');
@@ -209,11 +223,15 @@ products.forEach(product => {
     favBtn.onclick = () => alert('Added to favorites: ' + product.name);
     btns.appendChild(cartBtn);
     btns.appendChild(favBtn);
+
     item.appendChild(img);
     item.appendChild(price);
+    item.appendChild(colorButtons);  // Add color buttons to product item
     item.appendChild(btns);
+
     productContainer.appendChild(item);
 });
+
 
 function updatePrice() {
     const value = document.getElementById('price-range').value;
@@ -261,7 +279,7 @@ const links = [
     { text: 'About Us', href: '#' },
     { text: 'Contact Us', href: '#' },
     { text: 'Delivery Information', href: '#' },
-        { text: 'Submit a Testimonial', href: '#' }
+    { text: 'Submit a Testimonial', href: '#' }
 ];
 
 links.forEach(linkObj => {
