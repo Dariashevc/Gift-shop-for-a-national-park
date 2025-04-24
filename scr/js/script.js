@@ -185,7 +185,7 @@ const products = [
   { name: 'Toy 2', price: 45, img: './scr/images/toy2.jpg', colors: ['#b88135'] },
   { name: 'Toy 3', price: 45, img: './scr/images/toy3.jpg', colors: ['grey'] },
   { name: 'Toy 4', price: 40, img: './scr/images/toy4.jpg', colors: ['grey'] },
-  { name: 'T-shirts', price: 15, img: './scr/images/red-tshirt.jpg', colors: ['red', 'blue', 'green'] }
+  { name: 'T-shirts', price: 15, img: './scr/images/red-tshirt.jpg', colors: ['red', 'blue', 'black','grey'] }
 ];
 
 products.forEach(product => {
@@ -204,7 +204,7 @@ products.forEach(product => {
         const colorButton = document.createElement('button');
         colorButton.style.backgroundColor = color;
         colorButton.onclick = function () {
-            img.src = `./scr/images/${color}-${product.name.toLowerCase().replace(/\s+/g, '-')}.jpg`;
+            img.src = `./scr/images/${color}-${product.name.toLowerCase().replace()}.jpg`;
         };
         colorButtons.appendChild(colorButton);
     });
