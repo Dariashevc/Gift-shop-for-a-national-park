@@ -185,7 +185,18 @@ const products = [
   { name: 'Toy 2', price: 45, img: './scr/images/toy2.jpg', colors: ['#b88135'] },
   { name: 'Toy 3', price: 45, img: './scr/images/toy3.jpg', colors: ['grey'] },
   { name: 'Toy 4', price: 40, img: './scr/images/toy4.jpg', colors: ['grey'] },
-  { name: 'T-shirts', price: 15, img: './scr/images/red-tshirt.jpg', colors: ['red', 'blue', 'black','grey'] }
+      {
+    name: 'T-shirts',
+    price: 15,
+    img: './scr/images/red-tshirt.jpg', // default
+    colors: ['red', 'blue', 'black', 'grey'],
+    colorImages: {
+      red: './scr/images/red-tshirt.jpg',
+      blue: './scr/images/blue-tshirt.jpg',
+      black: './scr/images/black-tshirt.jpg',
+      grey: './scr/images/grey-tshirt.jpg'
+    }
+  }
 ];
 
 products.forEach(product => {
@@ -200,14 +211,15 @@ products.forEach(product => {
     const colorButtons = document.createElement('div');
     colorButtons.classList.add('color-buttons');
     
-    product.colors.forEach(color => {
-        const colorButton = document.createElement('button');
-        colorButton.style.backgroundColor = color;
-        colorButton.onclick = function () {
-            img.src = `./scr/images/${color}-${product.name.toLowerCase().replace()}.jpg`;
-        };
-        colorButtons.appendChild(colorButton);
-    });
+  product.colors.forEach(color => {
+    const colorButton = document.createElement('button');
+    colorButton.style.backgroundColor = color;
+    colorButton.title = color;
+    colorButton.onclick = () => {
+      img.src = product.colorImages[color];
+    };
+    colorButtons.appendChild(colorButton);
+  });
 
     const price = document.createElement('p');
     price.classList.add('product-price');
