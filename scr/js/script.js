@@ -50,7 +50,66 @@ favoriteIcon.appendChild(heartIcon);
 cartIcon.appendChild(cartIconImg);
 iconsDiv.appendChild(favoriteIcon);
 iconsDiv.appendChild(cartIcon);
+
+// === Add Menu Icon ===
+const menuButton = document.createElement('button');
+menuButton.classList.add('menu-btn');
+const menuIcon = document.createElement('i');
+menuIcon.classList.add('fas', 'fa-bars');
+menuButton.appendChild(menuIcon);
+iconsDiv.appendChild(menuButton);  // Add the menu button to icons div
 header.appendChild(iconsDiv);
+
+// === Create Menu Modal ===
+const menuModal = document.createElement('div');
+menuModal.classList.add('menu-modal');
+menuModal.style.display = 'none';  // Initially hidden
+document.body.appendChild(menuModal);
+
+// Add Close Button in the top-right corner
+const closeButton = document.createElement('button');
+closeButton.classList.add('close-btn');
+closeButton.innerHTML = '&times;';  // '×' symbol for close
+closeButton.onclick = function () {
+    menuModal.style.display = 'none';
+};
+menuModal.appendChild(closeButton);
+
+// Links in Modal
+const menuLinks = [
+    { text: 'About Us', href: '/scr/childPages/aboutUs.html' },
+    { text: 'Contact Us', href: '#' },
+    { text: 'Delivery Information', href: '#' },
+    { text: 'Submit a Testimonial', href: '#' }
+];
+
+const menuList = document.createElement('ul');
+menuLinks.forEach(linkObj => {
+    const listItem = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = linkObj.href;
+    link.textContent = linkObj.text;
+    listItem.appendChild(link);
+    menuList.appendChild(listItem);
+});
+menuModal.appendChild(menuList);
+
+// === Toggle Menu Modal Visibility ===
+menuButton.onclick = function () {
+    if (menuModal.style.display === 'none') {
+        menuModal.style.display = 'block';
+    } else {
+        menuModal.style.display = 'none';
+    }
+};
+
+// === Close Modal on 'Esc' key ===
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+        menuModal.style.display = 'none';
+    }
+});
+
 
 // === Create Hero Section ===
 const heroSection = document.createElement('section');
@@ -88,7 +147,7 @@ heroContent.appendChild(heroHeading);
 heroContent.appendChild(heroButton);
 heroSection.appendChild(heroContent);
 
-// === Horizontal Filter Bar and Modal ===
+// ====Filter Bar and Modal ===
 const filterBar = document.createElement('div');
 filterBar.classList.add('filter-bar');
 const filterBtn = document.createElement('button');
@@ -288,7 +347,7 @@ const footerLinks = document.createElement('div');
 footerLinks.classList.add('footer-links');
 
 const links = [
-    { text: 'About Us', href: '' },
+    { text: 'About Us', href: '/scr/childPages/aboutUs.html' },
     { text: 'Contact Us', href: '#' },
     { text: 'Delivery Information', href: '#' },
     { text: 'Submit a Testimonial', href: '#' }
