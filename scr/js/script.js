@@ -288,7 +288,7 @@ const footerLinks = document.createElement('div');
 footerLinks.classList.add('footer-links');
 
 const links = [
-    { text: 'About Us', href: '#' },
+    { text: 'About Us', href: '' },
     { text: 'Contact Us', href: '#' },
     { text: 'Delivery Information', href: '#' },
     { text: 'Submit a Testimonial', href: '#' }
