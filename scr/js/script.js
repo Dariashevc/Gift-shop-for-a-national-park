@@ -82,7 +82,7 @@ heroHeading.textContent = 'Bring the beautiful memories of nature home';
 const heroButton = document.createElement('button');
 heroButton.textContent = 'Go Shopping Now';
 heroButton.onclick = function () {
-    document.querySelector('.filter-bar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelector('.product-price').scrollIntoView({ behavior: 'smooth', block: 'center' });
 };
 heroContent.appendChild(heroHeading);
 heroContent.appendChild(heroButton);
