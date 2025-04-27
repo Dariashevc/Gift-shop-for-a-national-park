@@ -140,10 +140,9 @@ giftShopTitle.textContent = 'About the Gift Shop';
 aboutUsSection.appendChild(giftShopTitle);
 
 const giftShopContent = document.createElement('p');
-giftShopContent.textContent = `The National Park Gift Shop is more than just a store – it’s a way to bring a piece of the park home. Our carefully curated
+giftShopContent.textContent = `The National Park Gift Shop is more than just a store - it's a way to bring a piece of the park home. Our carefully curated
 collection features items inspired by the beauty of nature, from handcrafted souvenirs to eco-friendly products. Whether you're looking
-for the perfect gift, a keepsake to remind you of your time in the park, or outdoor gear for your next adventure, our shop offers
-a variety of high-quality products to suit every need. Every purchase helps support the park’s conservation efforts, so you can feel
+for the perfect gift, our shop offers a variety of high-quality products to remind you of your time in the park. Every purchase helps support the park's conservation efforts, so you can feel
 good knowing you are contributing to preserving the beauty of the natural world.`;
 
 aboutUsSection.appendChild(giftShopContent);
