@@ -132,31 +132,6 @@ header {
     /* Hover color */
 }
 
-/* Style for About Us Section */
-.about-us-section {
-    padding-top: 40px;
-    padding-bottom: 50px;
-    background-color: #aad4a9;
-    color: #111111;
-    text-align: center;
-}
-
-.about-us-section h1 {
-    font-size: 2.5rem;
-    margin-bottom: 25px;
-    margin-top: 0;
-    margin-bottom: 30px;
-}
-
-.about-us-section p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    max-width: 800px;
-    margin: 0 auto;
-    color: #2e2e2e;
-}
-
-
 
 
 footer.footer {

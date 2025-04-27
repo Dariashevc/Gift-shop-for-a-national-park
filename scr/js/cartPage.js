@@ -110,42 +110,6 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
-// === Create Main Section for About Us Page ===
-const aboutUsSection = document.createElement('section');
-aboutUsSection.classList.add('about-us-section');
-document.body.appendChild(aboutUsSection);
-
-// About Us Title
-const aboutUsTitle = document.createElement('h1');
-aboutUsTitle.textContent = 'About Us';
-aboutUsSection.appendChild(aboutUsTitle);
-
-// National Park Text
-const nationalParkTitle = document.createElement('h2');
-nationalParkTitle.textContent = 'About the National Park';
-aboutUsSection.appendChild(nationalParkTitle);
-
-const nationalParkContent = document.createElement('p');
-nationalParkContent.textContent = `The National Park is a vast and breathtaking natural sanctuary, home to diverse ecosystems, wildlife, and
-beautiful landscapes. Whether you enjoy hiking through towering forests, observing rare species of animals, or simply basking
-in the serenity of nature, the park offers a variety of experiences for every nature lover. The National Park is dedicated
-to preserving its unique biodiversity while offering a space for visitors to connect with the environment. With trails that
-wind through forests, open meadows, and scenic viewpoints, the park provides a tranquil escape for all who visit.`;
-
-aboutUsSection.appendChild(nationalParkContent);
-
-// Gift Shop Text
-const giftShopTitle = document.createElement('h2');
-giftShopTitle.textContent = 'About the Gift Shop';
-aboutUsSection.appendChild(giftShopTitle);
-
-const giftShopContent = document.createElement('p');
-giftShopContent.textContent = `The National Park Gift Shop is more than just a store - it's a way to bring a piece of the park home. Our carefully curated
-collection features items inspired by the beauty of nature, from handcrafted souvenirs to eco-friendly products. Whether you're looking
-for the perfect gift, our shop offers a variety of high-quality products to remind you of your time in the park. Every purchase helps support the park's conservation efforts, so you can feel
-good knowing you are contributing to preserving the beauty of the natural world.`;
-
-aboutUsSection.appendChild(giftShopContent);
 
 
 // === Create Footer ===
