@@ -167,7 +167,12 @@ heroHeading.textContent = 'Bring the beautiful memories of nature home';
 const heroButton = document.createElement('button');
 heroButton.textContent = 'Go Shopping Now';
 heroButton.onclick = function () {
-    document.querySelector('.product-price').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const filterBar = document.querySelector('.filter-bar'); 
+    const offset = filterBar.offsetTop - window.innerHeight * 0.09; 
+    window.scrollTo({
+        top: offset,
+        behavior: 'smooth'
+    });
 };
 heroContent.appendChild(heroHeading);
 heroContent.appendChild(heroButton);
@@ -193,7 +198,6 @@ filterModal.appendChild(filterOptions);
 
 const categories = ['Hats', 'T-shirts', 'Cups', 'Toys'];
 const colors = ['Red', 'Blue', 'Green', 'Black'];
-const sizes = ['Small', 'Medium', 'Large', 'X-Large'];
 
 function createFilterSection(title, items) {
     const sectionTitle = document.createElement('h3');
@@ -214,7 +218,6 @@ function createFilterSection(title, items) {
 
 createFilterSection('Categories', categories);
 createFilterSection('Colors', colors);
-createFilterSection('Size', sizes);
 
 const priceSectionTitle = document.createElement('h3');
 priceSectionTitle.textContent = 'Price Range';
@@ -253,6 +256,107 @@ filterBtn.onclick = function () {
     }
 };
 
+// Apply Filters Button Click
+applyBtn.onclick = function () {
+    const selectedCategories = [];
+    const selectedColors = [];
+    
+    // Get selected categories
+    const categoryCheckboxes = filterModal.querySelectorAll('.filter-section input[type="checkbox"]:checked');
+    categoryCheckboxes.forEach(checkbox => {
+        selectedCategories.push(checkbox.parentNode.textContent.trim());
+    });
+
+    // Get selected colors
+    const colorCheckboxes = filterModal.querySelectorAll('.color-checkbox:checked');
+    colorCheckboxes.forEach(checkbox => {
+        selectedColors.push(checkbox.value);
+    });
+
+    // Get selected price range
+    const selectedPrice = parseInt(document.getElementById('price-range').value);
+
+    // Filter products based on selected categories, colors, and price
+    const filteredProducts = products.filter(product => {
+        const isCategoryMatch = selectedCategories.length === 0 || selectedCategories.includes(product.name.split(' ')[0]);
+        const isColorMatch = selectedColors.length === 0 || selectedColors.some(color => product.colors.includes(color));
+        const isPriceMatch = product.price <= selectedPrice;
+
+        return isCategoryMatch && isColorMatch && isPriceMatch;
+    });
+
+    // Update product display
+    productContainer.innerHTML = '';  // Clear existing products
+    filteredProducts.forEach(product => {
+        const item = document.createElement('li');
+        item.classList.add('product-item');
+
+        const img = document.createElement('img');
+        img.src = product.img;
+        img.alt = product.name;
+
+        // Create color buttons
+        const colorButtons = document.createElement('div');
+        colorButtons.classList.add('color-buttons');
+        
+        product.colors.forEach(color => {
+            const colorButton = document.createElement('button');
+            colorButton.style.backgroundColor = color;
+            colorButton.title = color;
+            colorButton.onclick = () => {
+                img.src = product.colorImages[color];
+            };
+            colorButtons.appendChild(colorButton);
+        });
+
+        const price = document.createElement('p');
+        price.classList.add('product-price');
+        price.textContent = `$${product.price}`;
+
+        const btns = document.createElement('div');
+        btns.classList.add('product-buttons');
+        const cartBtn = document.createElement('button');
+        cartBtn.innerHTML = '<i class="fas fa-shopping-cart"></i>';
+        
+        cartBtn.onclick = () => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Added to Cart',
+                text: product.name + ' has been added to your cart!',
+                confirmButtonText: 'OK'
+            });
+        };
+
+        const favBtn = document.createElement('button');
+        favBtn.innerHTML = '<i class="fas fa-heart"></i>';
+        
+        favBtn.onclick = () => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Added to Favorites',
+                text: product.name + ' has been added to your favorites!',
+                confirmButtonText: 'OK'
+            });
+        };
+        
+        btns.appendChild(cartBtn);
+        btns.appendChild(favBtn);
+
+        item.appendChild(img);
+        item.appendChild(colorButtons);
+        item.appendChild(price);
+        item.appendChild(btns);
+        productContainer.appendChild(item);
+    });
+
+    // Close filter modal after applying
+    filterModal.style.display = 'none';
+    const arrow = document.getElementById('filter-arrow');
+    arrow.classList.remove('fa-chevron-up');
+    arrow.classList.add('fa-chevron-down');
+};
+
+
 // === Create Product List ===
 const productContainer = document.createElement('ul');
 productContainer.classList.add('product-container');
@@ -266,12 +370,12 @@ const products = [
   { name: 'Hat 1', price: 25, img: './scr/images/hat1.jpg', colors: ['#888cb5'] },
   { name: 'Hat 2', price: 35, img: './scr/images/hat2.jpg', colors: ['#7a3140'] },
   { name: 'Hat 3', price: 30, img: './scr/images/hat3.jpg', colors: ['#83b6c7'] },
-  { name: 'Toy 1', price: 40, img: './scr/images/toy1.jpg', colors: ['#806940'] },
-  { name: 'Toy 2', price: 45, img: './scr/images/toy2.jpg', colors: ['#b88135'] },
-  { name: 'Toy 3', price: 45, img: './scr/images/toy3.jpg', colors: ['grey'] },
-  { name: 'Toy 4', price: 40, img: './scr/images/toy4.jpg', colors: ['grey'] },
+  { name: 'Toy elk', price: 40, img: './scr/images/toy1.jpg', colors: ['#806940'] },
+  { name: 'Toy fox', price: 45, img: './scr/images/toy2.jpg', colors: ['#b88135'] },
+  { name: 'Toy wolf', price: 45, img: './scr/images/toy3.jpg', colors: ['grey'] },
+  { name: 'Toy hare', price: 40, img: './scr/images/toy4.jpg', colors: ['grey'] },
       {
-    name: 'T-shirts',
+    name: 'Tshirts',
     price: 15,
     img: './scr/images/red-tshirt.jpg', // default
     colors: ['red', 'blue', 'black', 'grey'],
