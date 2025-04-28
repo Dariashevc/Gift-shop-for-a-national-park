@@ -39,9 +39,9 @@ header.appendChild(searchContainer);
 const iconsDiv = document.createElement('div');
 iconsDiv.classList.add('icons');
 const favoriteIcon = document.createElement('a');
-favoriteIcon.href = '/scr/childPages/favoritePage.html';
+favoriteIcon.href = '/scr/childPages/favorite.html';
 const cartIcon = document.createElement('a');
-cartIcon.href = '/scr/childPages/cartPage.html';
+cartIcon.href = '/scr/childPages/cart.html';
 const heartIcon = document.createElement('i');
 heartIcon.classList.add('fas', 'fa-heart');
 const cartIconImg = document.createElement('i');
@@ -109,6 +109,14 @@ document.addEventListener('keydown', function (event) {
         menuModal.style.display = 'none';
     }
 });
+
+// === Close Menu Modal when clicking outside ===
+window.addEventListener('click', function (event) {
+    if (menuModal.style.display === 'block' && !menuModal.contains(event.target) && event.target !== menuButton && !menuButton.contains(event.target)) {
+        menuModal.style.display = 'none';
+    }
+});
+
 
 
 // === Create Hero Section ===

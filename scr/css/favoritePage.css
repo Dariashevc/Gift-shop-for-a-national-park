@@ -1,11 +1,12 @@
-/* General page background */
+/* === General Styles === */
 body {
     background-color: #aad4a9;
     margin: 0;
     font-family: Arial, sans-serif;
+    scroll-behavior: smooth;
 }
 
-/* Header Styles */
+/* === Header === */
 header {
     display: flex;
     align-items: center;
@@ -21,7 +22,6 @@ header {
     box-sizing: border-box;
 }
 
-/* Logo Styling */
 .logo a {
     font-size: 24px;
     font-weight: bold;
@@ -29,7 +29,6 @@ header {
     text-decoration: none;
     display: flex;
     align-items: center;
-    margin-right: 20px;
 }
 
 .logo i {
@@ -37,7 +36,6 @@ header {
     font-size: 28px;
 }
 
-/* Centered Search Bar */
 .search-container {
     flex-grow: 1;
     display: flex;
@@ -71,11 +69,100 @@ header {
     display: flex;
     gap: 25px;
     align-items: center;
-margin-left: 40px;
+    margin-left: 40px;
 }
 
 .icons i {
-    font-size: 22px;
+    font-size: 24px;
     cursor: pointer;
     color: white;
+}
+
+/* Style the close button */
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Style the menu button */
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Style the menu modal */
+.menu-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    display: none;
+    z-index: 1000;
+}
+
+.menu-modal ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu-modal li {
+    margin: 20px 0;
+}
+
+.menu-modal a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.menu-modal a:hover {
+    color: #4caf50;
+    /* Hover color */
+}
+
+
+
+footer.footer {
+    background-color: #4a734a;
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.footer .social-media a {
+    margin: 0 15px;
+    font-size: 28px;
+    color: white;
+    text-decoration: none;
+}
+
+.footer .social-media a:hover {
+    color: #d1f1d1;
+}
+
+.footer-links {
+    margin-top: 20px;
+}
+
+.footer-links a {
+    display: block;
+    color: white;
+    margin: 5px 0;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
 }
