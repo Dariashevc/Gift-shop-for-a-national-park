@@ -363,19 +363,19 @@ productContainer.classList.add('product-container');
 document.body.appendChild(productContainer);
 
 const products = [
-  { name: 'Cups', price: 18, img: './scr/images/cup1.jpg', colors: ['black'] },
-  { name: 'Cups', price: 20, img: './scr/images/cup2.jpg', colors: ['#bdb157'] },
-  { name: 'Cups', price: 20, img: './scr/images/cup3.jpg', colors: ['black'] },
-  { name: 'Cups', price: 25, img: './scr/images/cup4.jpg', colors: ['white'] },
-  { name: 'Hats', price: 25, img: './scr/images/hat1.jpg', colors: ['#888cb5'] },
-  { name: 'Hats', price: 35, img: './scr/images/hat2.jpg', colors: ['#7a3140'] },
-  { name: 'Hats', price: 30, img: './scr/images/hat3.jpg', colors: ['#83b6c7'] },
+  { name: 'Cup', price: 18, img: './scr/images/cup1.jpg', colors: ['black'] },
+  { name: 'Cup', price: 20, img: './scr/images/cup2.jpg', colors: ['#bdb157'] },
+  { name: 'Cup', price: 20, img: './scr/images/cup3.jpg', colors: ['black'] },
+  { name: 'Cup', price: 25, img: './scr/images/cup4.jpg', colors: ['white'] },
+  { name: 'Hat', price: 25, img: './scr/images/hat1.jpg', colors: ['#888cb5'] },
+  { name: 'Hat', price: 35, img: './scr/images/hat2.jpg', colors: ['#7a3140'] },
+  { name: 'Hat', price: 30, img: './scr/images/hat3.jpg', colors: ['#83b6c7'] },
   { name: 'Toy elk', price: 40, img: './scr/images/toy1.jpg', colors: ['#806940'] },
   { name: 'Toy fox', price: 45, img: './scr/images/toy2.jpg', colors: ['#b88135'] },
   { name: 'Toy wolf', price: 45, img: './scr/images/toy3.jpg', colors: ['grey'] },
   { name: 'Toy hare', price: 40, img: './scr/images/toy4.jpg', colors: ['grey'] },
       {
-    name: 'Tshirts',
+    name: 'Tshirt',
     price: 15,
     img: './scr/images/red-tshirt.jpg', // default
     colors: ['red', 'blue', 'black', 'grey'],
@@ -420,34 +420,37 @@ products.forEach(product => {
     cartBtn.innerHTML = '<i class="fas fa-shopping-cart"></i>';
     
   cartBtn.onclick = () => {
-  Swal.fire({
-    icon: 'success',
-    title: 'Added to Cart',
-    text: product.name + ' has been added to your cart!',
-    confirmButtonText: 'OK'
-  });
-};
+            Swal.fire({
+                icon: 'success',
+                title: 'Added to Cart',
+                text: product.name + ' has been added to your cart!',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        };
 
-    const favBtn = document.createElement('button');
-    favBtn.innerHTML = '<i class="fas fa-heart"></i>';
-    
-favBtn.onclick = () => {
-  Swal.fire({
-    icon: 'success',
-    title: 'Added to Favorites',
-    text: product.name + ' has been added to your favorites!',
-    confirmButtonText: 'OK'
-  });
-};
-    btns.appendChild(cartBtn);
-    btns.appendChild(favBtn);
+        const favBtn = document.createElement('button');
+        favBtn.innerHTML = '<i class="fas fa-heart"></i>';
+        favBtn.onclick = () => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Added to Favorites',
+                text: product.name + ' has been added to your favorites!',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        };
 
-    item.appendChild(img);
-    item.appendChild(colorButtons);
-    item.appendChild(price);
-    item.appendChild(btns);
-    productContainer.appendChild(item);
-});
+        btns.appendChild(cartBtn);
+        btns.appendChild(favBtn);
+
+        item.appendChild(img);
+        item.appendChild(colorButtons);
+        item.appendChild(price);
+        item.appendChild(btns);
+
+        productContainer.appendChild(item);
+    });
 
 
 function updatePrice() {
