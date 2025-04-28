@@ -25,8 +25,26 @@ searchInput.id = 'search';
 searchInput.placeholder = 'Search for products...';
 const searchButton = document.createElement('button');
 searchButton.onclick = function () {
-    alert('Searching for: ' + searchInput.value);
+    const searchValue = searchInput.value.trim().toLowerCase();
+    const items = document.querySelectorAll('.product-item');
+
+    items.forEach(item => {
+        const productName = item.querySelector('img').alt.toLowerCase();
+        if (productName.includes(searchValue)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+
+    productContainer.scrollIntoView({ behavior: 'smooth' });
 };
+searchInput.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') { // Check if Enter key was pressed
+    event.preventDefault(); // Prevent the default form submission behavior (if any)
+    searchButton.click(); // Trigger the search button click event
+  }
+});
 const searchIcon = document.createElement('i');
 searchIcon.classList.add('fas', 'fa-search');
 searchButton.appendChild(searchIcon);
@@ -296,18 +314,34 @@ products.forEach(product => {
     btns.classList.add('product-buttons');
     const cartBtn = document.createElement('button');
     cartBtn.innerHTML = '<i class="fas fa-shopping-cart"></i>';
-    cartBtn.onclick = () => alert('Added to cart: ' + product.name);
+    
+  cartBtn.onclick = () => {
+  Swal.fire({
+    icon: 'success',
+    title: 'Added to Cart',
+    text: product.name + ' has been added to your cart!',
+    confirmButtonText: 'OK'
+  });
+};
+
     const favBtn = document.createElement('button');
     favBtn.innerHTML = '<i class="fas fa-heart"></i>';
-    favBtn.onclick = () => alert('Added to favorites: ' + product.name);
+    
+favBtn.onclick = () => {
+  Swal.fire({
+    icon: 'success',
+    title: 'Added to Favorites',
+    text: product.name + ' has been added to your favorites!',
+    confirmButtonText: 'OK'
+  });
+};
     btns.appendChild(cartBtn);
     btns.appendChild(favBtn);
 
     item.appendChild(img);
+    item.appendChild(colorButtons);
     item.appendChild(price);
-    item.appendChild(colorButtons);  // Add color buttons to product item
     item.appendChild(btns);
-
     productContainer.appendChild(item);
 });
 
@@ -369,3 +403,16 @@ links.forEach(linkObj => {
 });
 
 footer.appendChild(footerLinks);
+
+async function fetchProducts() {
+  try {
+    const response = await fetch('./scr/php/products.php');
+    const products = await response.json();
+    console.log(products); 
+    displayProducts(products); 
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+}
+
+fetchProducts();
