@@ -197,7 +197,7 @@ filterOptions.classList.add('filter-options');
 filterModal.appendChild(filterOptions);
 
 // Filters data
-const categories = ['Cup', 'Hat', 'Toy', 'Tshirt'];
+const categories = ['Cup', 'Hat', 'Toy', 'T-shirt'];
 const colors = ['red', 'blue', 'black', 'grey', 'white', '#bdb157', '#888cb5', '#7a3140', '#83b6c7', '#806940', '#b88135'];
 
 // Create a filter section
@@ -399,7 +399,7 @@ const products = [
   { name: 'Toy wolf', price: 45, img: './scr/images/toy3.jpg', colors: ['grey'] },
   { name: 'Toy hare', price: 40, img: './scr/images/toy4.jpg', colors: ['grey'] },
       {
-    name: 'Tshirts',
+    name: 'T-shirt',
     price: 15,
     img: './scr/images/red-tshirt.jpg', // default
     colors: ['red', 'blue', 'black', 'grey'],

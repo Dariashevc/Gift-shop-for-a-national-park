@@ -83,7 +83,7 @@ $products = [
         'colors' => ['grey']
     ],
     [
-        'name' => 'Tshirt',
+        'name' => 'T-shirt',
         'price' => 15,
         'img' => './scr/images/red-tshirt.jpg', // default
         'colors' => ['red', 'blue', 'black', 'grey'],
