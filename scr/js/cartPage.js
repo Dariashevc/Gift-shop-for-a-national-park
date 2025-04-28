@@ -77,7 +77,7 @@ menuModal.appendChild(closeButton);
 
 // Links in Modal
 const menuLinks = [
-    { text: 'About Us', href: '#' },
+    { text: 'About Us', href: '/scr/childPages/aboutUs.html' },
     { text: 'Contact Us', href: '#' },
     { text: 'Delivery Information', href: '#' },
     { text: 'Submit a Testimonial', href: '#' }
@@ -110,6 +110,12 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
+// === Close Menu Modal when clicking outside ===
+window.addEventListener('click', function (event) {
+    if (menuModal.style.display === 'block' && !menuModal.contains(event.target) && event.target !== menuButton && !menuButton.contains(event.target)) {
+        menuModal.style.display = 'none';
+    }
+});
 
 
 // === Create Footer ===
@@ -142,7 +148,7 @@ const footerLinks = document.createElement('div');
 footerLinks.classList.add('footer-links');
 
 const links = [
-    { text: 'About Us', href: '#' },
+    { text: 'About Us', href: '/scr/childPages/aboutUs.html' },
     { text: 'Contact Us', href: '#' },
     { text: 'Delivery Information', href: '#' },
     { text: 'Submit a Testimonial', href: '#' }

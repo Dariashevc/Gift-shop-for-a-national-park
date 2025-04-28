@@ -110,6 +110,15 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
+// === Close Menu Modal when clicking outside ===
+window.addEventListener('click', function (event) {
+    if (menuModal.style.display === 'block' && !menuModal.contains(event.target) && event.target !== menuButton && !menuButton.contains(event.target)) {
+        menuModal.style.display = 'none';
+    }
+});
+
+
+
 // === Create Main Section for About Us Page ===
 const aboutUsSection = document.createElement('section');
 aboutUsSection.classList.add('about-us-section');
