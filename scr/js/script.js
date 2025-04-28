@@ -363,13 +363,13 @@ productContainer.classList.add('product-container');
 document.body.appendChild(productContainer);
 
 const products = [
-  { name: 'Cup 1', price: 18, img: './scr/images/cup1.jpg', colors: ['black'] },
-  { name: 'Cup 2', price: 20, img: './scr/images/cup2.jpg', colors: ['#bdb157'] },
-  { name: 'Cup 3', price: 20, img: './scr/images/cup3.jpg', colors: ['black'] },
-  { name: 'Cup 4', price: 25, img: './scr/images/cup4.jpg', colors: ['white'] },
-  { name: 'Hat 1', price: 25, img: './scr/images/hat1.jpg', colors: ['#888cb5'] },
-  { name: 'Hat 2', price: 35, img: './scr/images/hat2.jpg', colors: ['#7a3140'] },
-  { name: 'Hat 3', price: 30, img: './scr/images/hat3.jpg', colors: ['#83b6c7'] },
+  { name: 'Cups', price: 18, img: './scr/images/cup1.jpg', colors: ['black'] },
+  { name: 'Cups', price: 20, img: './scr/images/cup2.jpg', colors: ['#bdb157'] },
+  { name: 'Cups', price: 20, img: './scr/images/cup3.jpg', colors: ['black'] },
+  { name: 'Cups', price: 25, img: './scr/images/cup4.jpg', colors: ['white'] },
+  { name: 'Hats', price: 25, img: './scr/images/hat1.jpg', colors: ['#888cb5'] },
+  { name: 'Hats', price: 35, img: './scr/images/hat2.jpg', colors: ['#7a3140'] },
+  { name: 'Hats', price: 30, img: './scr/images/hat3.jpg', colors: ['#83b6c7'] },
   { name: 'Toy elk', price: 40, img: './scr/images/toy1.jpg', colors: ['#806940'] },
   { name: 'Toy fox', price: 45, img: './scr/images/toy2.jpg', colors: ['#b88135'] },
   { name: 'Toy wolf', price: 45, img: './scr/images/toy3.jpg', colors: ['grey'] },
