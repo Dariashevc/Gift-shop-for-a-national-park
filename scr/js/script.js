@@ -198,7 +198,7 @@ filterModal.appendChild(filterOptions);
 
 // Filters data
 const categories = ['Cup', 'Hat', 'Toy', 'T-shirt'];
-const colors = ['red', 'blue', 'black', 'grey', 'white', '#bdb157', '#888cb5', '#7a3140', '#83b6c7', '#806940', '#b88135'];
+const colors = ['red', 'blue', 'black', 'grey', 'brown'];
 
 // Create a filter section
 function createFilterSection(title, items, type) {
@@ -277,14 +277,14 @@ document.body.appendChild(productContainer);
 // === Product Data ===
 const products = [
     { name: 'Cup', price: 18, img: './scr/images/cup1.jpg', colors: ['black'] },
-    { name: 'Cup', price: 20, img: './scr/images/cup2.jpg', colors: ['#bdb157'] },
-    { name: 'Cup', price: 20, img: './scr/images/cup3.jpg', colors: ['black'] },
+    { name: 'Cup', price: 20, img: './scr/images/cup2.jpg', colors: ['black'] },
+    { name: 'Cup', price: 20, img: './scr/images/cup3.jpg', colors: ['white'] },
     { name: 'Cup', price: 25, img: './scr/images/cup4.jpg', colors: ['white'] },
-    { name: 'Hat', price: 25, img: './scr/images/hat1.jpg', colors: ['#888cb5'] },
-    { name: 'Hat', price: 35, img: './scr/images/hat2.jpg', colors: ['#7a3140'] },
-    { name: 'Hat', price: 30, img: './scr/images/hat3.jpg', colors: ['#83b6c7'] },
-    { name: 'Toy elk', price: 40, img: './scr/images/toy1.jpg', colors: ['#806940'] },
-    { name: 'Toy fox', price: 45, img: './scr/images/toy2.jpg', colors: ['#b88135'] },
+    { name: 'Hat', price: 25, img: './scr/images/hat1.jpg', colors: ['grey'] },
+    { name: 'Hat', price: 35, img: './scr/images/hat2.jpg', colors: ['DarkRed'] },
+    { name: 'Hat', price: 30, img: './scr/images/hat3.jpg', colors: ['LightBlue'] },
+    { name: 'Toy elk', price: 40, img: './scr/images/toy1.jpg', colors: ['Sienna'] },
+    { name: 'Toy fox', price: 45, img: './scr/images/toy2.jpg', colors: ['Chocolate'] },
     { name: 'Toy wolf', price: 45, img: './scr/images/toy3.jpg', colors: ['grey'] },
     { name: 'Toy hare', price: 40, img: './scr/images/toy4.jpg', colors: ['grey'] },
     {
