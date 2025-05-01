@@ -269,46 +269,42 @@ filterBtn.onclick = function () {
     }
 };
 
-// === Products ===
+// === Create Product List ===
+const productContainer = document.createElement('ul');
+productContainer.classList.add('product-container');
+document.body.appendChild(productContainer);
 
-function updatePrice() {
-    const range = document.getElementById('price-range');
-    const display = document.getElementById('price-display');
-    display.textContent = `$${range.value}`;
-}
+// === Product Data ===
+const products = [
+    { name: 'Cup', price: 18, img: './scr/images/cup1.jpg', colors: ['black'] },
+    { name: 'Cup', price: 20, img: './scr/images/cup2.jpg', colors: ['#bdb157'] },
+    { name: 'Cup', price: 20, img: './scr/images/cup3.jpg', colors: ['black'] },
+    { name: 'Cup', price: 25, img: './scr/images/cup4.jpg', colors: ['white'] },
+    { name: 'Hat', price: 25, img: './scr/images/hat1.jpg', colors: ['#888cb5'] },
+    { name: 'Hat', price: 35, img: './scr/images/hat2.jpg', colors: ['#7a3140'] },
+    { name: 'Hat', price: 30, img: './scr/images/hat3.jpg', colors: ['#83b6c7'] },
+    { name: 'Toy elk', price: 40, img: './scr/images/toy1.jpg', colors: ['#806940'] },
+    { name: 'Toy fox', price: 45, img: './scr/images/toy2.jpg', colors: ['#b88135'] },
+    { name: 'Toy wolf', price: 45, img: './scr/images/toy3.jpg', colors: ['grey'] },
+    { name: 'Toy hare', price: 40, img: './scr/images/toy4.jpg', colors: ['grey'] },
+    {
+        name: 'T-shirt',
+        price: 15,
+        img: './scr/images/red-tshirt.jpg',
+        colors: ['red', 'blue', 'black', 'grey'],
+        colorImages: {
+            red: './scr/images/red-tshirt.jpg',
+            blue: './scr/images/blue-tshirt.jpg',
+            black: './scr/images/black-tshirt.jpg',
+            grey: './scr/images/grey-tshirt.jpg'
+        }
+    }
+];
 
-// Apply Filters Button Click
-applyBtn.onclick = function () {
-    const selectedCategories = [];
-    const selectedColors = [];
-
-    // Get selected categories
-    const categoryCheckboxes = filterModal.querySelectorAll('.category-checkbox:checked');
-    categoryCheckboxes.forEach(checkbox => {
-        selectedCategories.push(checkbox.value);
-    });
-
-    // Get selected colors
-    const colorCheckboxes = filterModal.querySelectorAll('.color-checkbox:checked');
-    colorCheckboxes.forEach(checkbox => {
-        selectedColors.push(checkbox.value.toLowerCase());
-    });
-
-    // Get selected price
-    const selectedPrice = parseInt(document.getElementById('price-range').value);
-
-    // Filter products
-    const filteredProducts = products.filter(product => {
-        const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(product.name.split(' ')[0]);
-        const colorMatch = selectedColors.length === 0 || product.colors.some(color => selectedColors.includes(color.toLowerCase()));
-        const priceMatch = product.price <= selectedPrice;
-
-        return categoryMatch && colorMatch && priceMatch;
-    });
-
-    // Update product display
-    productContainer.innerHTML = ''; // Clear previous products
-    filteredProducts.forEach(product => {
+// === Render Products ===
+function renderProducts(productList) {
+    productContainer.innerHTML = '';
+    productList.forEach(product => {
         const item = document.createElement('li');
         item.classList.add('product-item');
 
@@ -316,7 +312,6 @@ applyBtn.onclick = function () {
         img.src = product.img;
         img.alt = product.name;
 
-        // Color buttons
         const colorButtons = document.createElement('div');
         colorButtons.classList.add('color-buttons');
 
@@ -328,6 +323,13 @@ applyBtn.onclick = function () {
                 colorButton.onclick = () => {
                     img.src = product.colorImages[color];
                 };
+                colorButtons.appendChild(colorButton);
+            });
+        } else {
+            product.colors.forEach(color => {
+                const colorButton = document.createElement('button');
+                colorButton.style.backgroundColor = color;
+                colorButton.title = color;
                 colorButtons.appendChild(colorButton);
             });
         }
@@ -346,7 +348,8 @@ applyBtn.onclick = function () {
                 icon: 'success',
                 title: 'Added to Cart',
                 text: product.name + ' has been added to your cart!',
-                confirmButtonText: 'OK'
+                timer: 1500,
+                showConfirmButton: false
             });
         };
 
@@ -357,7 +360,8 @@ applyBtn.onclick = function () {
                 icon: 'success',
                 title: 'Added to Favorites',
                 text: product.name + ' has been added to your favorites!',
-                confirmButtonText: 'OK'
+                timer: 1500,
+                showConfirmButton: false
             });
         };
 
@@ -370,125 +374,59 @@ applyBtn.onclick = function () {
         }
         item.appendChild(price);
         item.appendChild(btns);
+
         productContainer.appendChild(item);
     });
+}
 
-    // Close filter modal after applying
+// Initial render
+renderProducts(products);
+
+// === Apply Filters ===
+applyBtn.onclick = function () {
+    const selectedCategories = [];
+    const selectedColors = [];
+
+    const categoryCheckboxes = filterModal.querySelectorAll('.category-checkbox:checked');
+    categoryCheckboxes.forEach(checkbox => selectedCategories.push(checkbox.value));
+
+    const colorCheckboxes = filterModal.querySelectorAll('.color-checkbox:checked');
+    colorCheckboxes.forEach(checkbox => selectedColors.push(checkbox.value.toLowerCase()));
+
+    const selectedPrice = parseInt(document.getElementById('price-range').value);
+
+    const filteredProducts = products.filter(product => {
+        const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(product.name.split(' ')[0]);
+        const colorMatch = selectedColors.length === 0 || product.colors.some(color => selectedColors.includes(color.toLowerCase()));
+        const priceMatch = product.price <= selectedPrice;
+
+        return categoryMatch && colorMatch && priceMatch;
+    });
+
+    renderProducts(filteredProducts);
+
     filterModal.style.display = 'none';
     const arrow = document.getElementById('filter-arrow');
     arrow.classList.remove('fa-chevron-up');
     arrow.classList.add('fa-chevron-down');
 };
 
-
-// === Create Product List ===
-const productContainer = document.createElement('ul');
-productContainer.classList.add('product-container');
-document.body.appendChild(productContainer);
-
-const products = [
-  { name: 'Cup', price: 18, img: './scr/images/cup1.jpg', colors: ['black'] },
-  { name: 'Cup', price: 20, img: './scr/images/cup2.jpg', colors: ['#bdb157'] },
-  { name: 'Cup', price: 20, img: './scr/images/cup3.jpg', colors: ['black'] },
-  { name: 'Cup', price: 25, img: './scr/images/cup4.jpg', colors: ['white'] },
-  { name: 'Hat', price: 25, img: './scr/images/hat1.jpg', colors: ['#888cb5'] },
-  { name: 'Hat', price: 35, img: './scr/images/hat2.jpg', colors: ['#7a3140'] },
-  { name: 'Hat', price: 30, img: './scr/images/hat3.jpg', colors: ['#83b6c7'] },
-  { name: 'Toy elk', price: 40, img: './scr/images/toy1.jpg', colors: ['#806940'] },
-  { name: 'Toy fox', price: 45, img: './scr/images/toy2.jpg', colors: ['#b88135'] },
-  { name: 'Toy wolf', price: 45, img: './scr/images/toy3.jpg', colors: ['grey'] },
-  { name: 'Toy hare', price: 40, img: './scr/images/toy4.jpg', colors: ['grey'] },
-      {
-    name: 'T-shirt',
-    price: 15,
-    img: './scr/images/red-tshirt.jpg', // default
-    colors: ['red', 'blue', 'black', 'grey'],
-    colorImages: {
-      red: './scr/images/red-tshirt.jpg',
-      blue: './scr/images/blue-tshirt.jpg',
-      black: './scr/images/black-tshirt.jpg',
-      grey: './scr/images/grey-tshirt.jpg'
-    }
-  }
-];
-
-products.forEach(product => {
-    const item = document.createElement('li');
-    item.classList.add('product-item');
-
-    const img = document.createElement('img');
-    img.src = product.img;
-    img.alt = product.name;
-
-    // Create color buttons
-    const colorButtons = document.createElement('div');
-    colorButtons.classList.add('color-buttons');
-    
-  product.colors.forEach(color => {
-    const colorButton = document.createElement('button');
-    colorButton.style.backgroundColor = color;
-    colorButton.title = color;
-    colorButton.onclick = () => {
-      img.src = product.colorImages[color];
-    };
-    colorButtons.appendChild(colorButton);
-  });
-
-    const price = document.createElement('p');
-    price.classList.add('product-price');
-    price.textContent = `$${product.price}`;
-
-    const btns = document.createElement('div');
-    btns.classList.add('product-buttons');
-    const cartBtn = document.createElement('button');
-    cartBtn.innerHTML = '<i class="fas fa-shopping-cart"></i>';
-    
-  cartBtn.onclick = () => {
-            Swal.fire({
-                icon: 'success',
-                title: 'Added to Cart',
-                text: product.name + ' has been added to your cart!',
-                timer: 1500,
-                showConfirmButton: false
-            });
-        };
-
-        const favBtn = document.createElement('button');
-        favBtn.innerHTML = '<i class="fas fa-heart"></i>';
-        favBtn.onclick = () => {
-            Swal.fire({
-                icon: 'success',
-                title: 'Added to Favorites',
-                text: product.name + ' has been added to your favorites!',
-                timer: 1500,
-                showConfirmButton: false
-            });
-        };
-
-        btns.appendChild(cartBtn);
-        btns.appendChild(favBtn);
-
-        item.appendChild(img);
-        item.appendChild(colorButtons);
-        item.appendChild(price);
-        item.appendChild(btns);
-
-        productContainer.appendChild(item);
-    });
-
-
+// === Update Price Display ===
 function updatePrice() {
     const value = document.getElementById('price-range').value;
     document.getElementById('price-display').textContent = `$${value}`;
 }
 
+// === Slideshow (if applicable) ===
 let currentSlide = 0;
 setInterval(() => {
     const allSlides = document.querySelectorAll('.slide');
+    if (allSlides.length === 0) return;
     allSlides.forEach(slide => slide.classList.remove('active'));
     currentSlide = (currentSlide + 1) % allSlides.length;
     allSlides[currentSlide].classList.add('active');
 }, 4000);
+
 
 // === Create Footer ===
 const footer = document.createElement('footer');
