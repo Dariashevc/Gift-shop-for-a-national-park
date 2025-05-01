@@ -370,9 +370,10 @@ function renderProducts(productList) {
 
         item.appendChild(img);
         if (colorButtons.children.length > 0) {
+          item.appendChild(price);
             item.appendChild(colorButtons);
         }
-        item.appendChild(price);
+
         item.appendChild(btns);
 
         productContainer.appendChild(item);
