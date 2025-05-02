@@ -1,17 +1,6 @@
 <?php
 header('Content-Type: application/json');
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "national_park_shop";
-
-// Database connection
-$conn = new mysqli($servername, $username, $password, $database);
-if ($conn->connect_error) {
-    die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
-}
-
 // Define products
 $products = [
     [
@@ -123,21 +112,37 @@ $products = [
     ]
 ];
 
+// Define a color mapping to normalize color names
+$colorMapping = [
+    'DarkRed' => 'red',
+    'LightBlue' => 'blue',
+    'red' => 'red',
+    'blue' => 'blue',
+    'black' => 'black',
+    'grey' => 'grey',
+    'white' => 'white',
+    'brown' => 'brown'
+];
+
 // Receive filters from POST
 $category = $_POST['category'] ?? '';
 $color = $_POST['color'] ?? '';
 $maxPrice = $_POST['maxPrice'] ?? 1000;
 $searchQuery = strtolower($_POST['searchQuery'] ?? '');
 
+// Normalize the color filter input
+$normalizedColor = $colorMapping[$color] ?? $color;
+
 // Filter logic
-$filteredProducts = array_filter($products, function ($product) use ($category, $color, $maxPrice, $searchQuery) {
+$filteredProducts = array_filter($products, function ($product) use ($category, $normalizedColor, $maxPrice, $searchQuery, $colorMapping) {
     $matchCategory = !$category || stripos($product['name'], $category) !== false;
     $matchColor = true;
 
-    if ($color) {
+    if ($normalizedColor) {
         $matchColor = false;
         foreach ($product['colors'] as $col) {
-            if ($col['logical'] === $color) {
+            $logicalColor = $colorMapping[$col['logical']] ?? $col['logical'];
+            if ($logicalColor === $normalizedColor) {
                 $matchColor = true;
                 break;
             }
@@ -152,7 +157,4 @@ $filteredProducts = array_filter($products, function ($product) use ($category, 
 
 // Return filtered products only
 echo json_encode(array_values($filteredProducts));
-
-// Close DB connection
-$conn->close();
 ?>

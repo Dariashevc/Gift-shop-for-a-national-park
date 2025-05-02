@@ -392,7 +392,10 @@ applyBtn.onclick = function () {
     categoryCheckboxes.forEach(checkbox => selectedCategories.push(checkbox.value));
 
     const colorCheckboxes = filterModal.querySelectorAll('.color-checkbox:checked');
-    colorCheckboxes.forEach(checkbox => selectedColors.push(checkbox.value.toLowerCase()));
+    colorCheckboxes.forEach(checkbox => {
+        const normalized = colorMapping[checkbox.value] || checkbox.value; // Normalize color
+        selectedColors.push(normalized.toLowerCase());
+    });
 
     const selectedPrice = parseInt(document.getElementById('price-range').value);
 
@@ -403,6 +406,9 @@ applyBtn.onclick = function () {
 
         return categoryMatch && colorMatch && priceMatch;
     });
+
+    console.log('Selected Colors:', selectedColors);
+    console.log('Filtered Products:', filteredProducts);
 
     renderProducts(filteredProducts);
 
@@ -486,3 +492,31 @@ async function fetchProducts() {
 }
 
 fetchProducts();
+
+// Example color mapping in JavaScript
+const colorMapping = {
+    DarkRed: 'red',
+    LightBlue: 'blue',
+    red: 'red',
+    blue: 'blue',
+    black: 'black',
+    grey: 'grey',
+    white: 'white',
+    brown: 'brown'
+};
+
+// Function to normalize color before sending to the server
+function normalizeColor(selectedColor) {
+    return colorMapping[selectedColor] || selectedColor;
+}
+
+// Example usage
+const selectedColor = document.getElementById('colorFilter').value; // Assume this is the selected color
+const normalizedColor = normalizeColor(selectedColor);
+
+// Send normalized color to the server
+fetch('/path/to/products.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ color: normalizedColor })
+});
