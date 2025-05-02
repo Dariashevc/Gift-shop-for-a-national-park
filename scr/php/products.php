@@ -129,32 +129,4 @@ $category = $_POST['category'] ?? '';
 $color = $_POST['color'] ?? '';
 $maxPrice = $_POST['maxPrice'] ?? 1000;
 $searchQuery = strtolower($_POST['searchQuery'] ?? '');
-
-// Normalize the color filter input
-$normalizedColor = $colorMapping[$color] ?? $color;
-
-// Filter logic
-$filteredProducts = array_filter($products, function ($product) use ($category, $normalizedColor, $maxPrice, $searchQuery, $colorMapping) {
-    $matchCategory = !$category || stripos($product['name'], $category) !== false;
-    $matchColor = true;
-
-    if ($normalizedColor) {
-        $matchColor = false;
-        foreach ($product['colors'] as $col) {
-            $logicalColor = $colorMapping[$col['logical']] ?? $col['logical'];
-            if ($logicalColor === $normalizedColor) {
-                $matchColor = true;
-                break;
-            }
-        }
-    }
-
-    $matchPrice = $product['price'] <= $maxPrice;
-    $matchSearch = !$searchQuery || stripos($product['name'], $searchQuery) !== false;
-
-    return $matchCategory && $matchColor && $matchPrice && $matchSearch;
-});
-
-// Return filtered products only
-echo json_encode(array_values($filteredProducts));
 ?>
