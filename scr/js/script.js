@@ -276,30 +276,37 @@ document.body.appendChild(productContainer);
 
 // === Product Data ===
 const products = [
-    { name: 'Cup', price: 18, img: './scr/images/cup1.jpg', colors: ['black'] },
-    { name: 'Cup', price: 20, img: './scr/images/cup2.jpg', colors: ['black'] },
-    { name: 'Cup', price: 20, img: './scr/images/cup3.jpg', colors: ['white'] },
-    { name: 'Cup', price: 25, img: './scr/images/cup4.jpg', colors: ['white'] },
-    { name: 'Hat', price: 25, img: './scr/images/hat1.jpg', colors: ['grey'] },
-    { name: 'Hat', price: 35, img: './scr/images/hat2.jpg', colors: ['brown'] },
-    { name: 'Hat', price: 30, img: './scr/images/hat3.jpg', colors: ['blue'] },
-    { name: 'Toy elk', price: 40, img: './scr/images/toy1.jpg', colors: ['brown'] },
-    { name: 'Toy fox', price: 45, img: './scr/images/toy2.jpg', colors: ['brown'] },
-    { name: 'Toy wolf', price: 45, img: './scr/images/toy3.jpg', colors: ['grey'] },
-    { name: 'Toy hare', price: 40, img: './scr/images/toy4.jpg', colors: ['grey'] },
+    { name: 'Cup', price: 18, img: '/scr/images/cup1.jpg', colors: ['black'] },
+    { name: 'Cup', price: 20, img: '/scr/images/cup2.jpg', colors: ['black'] },
+    { name: 'Cup', price: 20, img: '/scr/images/cup3.jpg', colors: ['white'] },
+    { name: 'Cup', price: 25, img: '/scr/images/cup4.jpg', colors: ['white'] },
+    { name: 'Hat', price: 25, img: '/scr/images/hat1.jpg', colors: ['grey'] },
+    { name: 'Hat', price: 35, img: '/scr/images/hat2.jpg', colors: ['brown'] },
+    { name: 'Hat', price: 30, img: '/scr/images/hat3.jpg', colors: ['blue'] },
+    { name: 'Toy elk', price: 40, img: '/scr/images/toy1.jpg', colors: ['brown'] },
+    { name: 'Toy fox', price: 45, img: '/scr/images/toy2.jpg', colors: ['brown'] },
+    { name: 'Toy wolf', price: 45, img: '/scr/images/toy3.jpg', colors: ['grey'] },
+    { name: 'Toy hare', price: 40, img: '/scr/images/toy4.jpg', colors: ['grey'] },
     {
         name: 'T-shirt',
         price: 15,
-        img: './scr/images/red-tshirt.jpg',
+        img: '/scr/images/red-tshirt.jpg',
         colors: ['red', 'blue', 'black', 'grey'],
         colorImages: {
-            red: './scr/images/red-tshirt.jpg',
-            blue: './scr/images/blue-tshirt.jpg',
-            black: './scr/images/black-tshirt.jpg',
-            grey: './scr/images/grey-tshirt.jpg'
+            red: '/scr/images/red-tshirt.jpg',
+            blue: '/scr/images/blue-tshirt.jpg',
+            black: '/scr/images/black-tshirt.jpg',
+            grey: '/scr/images/grey-tshirt.jpg'
         }
     }
 ];
+
+// === Add to Cart Function ===
+function addToCart(product) {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(product);
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
 
 // === Render Products ===
 function renderProducts(productList) {
@@ -325,7 +332,7 @@ function renderProducts(productList) {
                 };
                 colorButtons.appendChild(colorButton);
             });
-        } else {
+        } else if (product.colors) {
             product.colors.forEach(color => {
                 const colorButton = document.createElement('button');
                 colorButton.style.backgroundColor = color;
@@ -344,6 +351,7 @@ function renderProducts(productList) {
         const cartBtn = document.createElement('button');
         cartBtn.innerHTML = '<i class="fas fa-shopping-cart"></i>';
         cartBtn.onclick = () => {
+            addToCart(product);
             Swal.fire({
                 icon: 'success',
                 title: 'Added to Cart',
@@ -370,18 +378,18 @@ function renderProducts(productList) {
 
         item.appendChild(img);
         if (colorButtons.children.length > 0) {
-          item.appendChild(price);
+            item.appendChild(price);
             item.appendChild(colorButtons);
         }
-
         item.appendChild(btns);
 
         productContainer.appendChild(item);
     });
 }
 
-// Initial render
+// === Initial Render ===
 renderProducts(products);
+
 
 // === Apply Filters ===
 applyBtn.onclick = function () {

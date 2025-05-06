@@ -118,6 +118,79 @@ window.addEventListener('click', function (event) {
 });
 
 
+document.addEventListener("DOMContentLoaded", () => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    renderCart(cart);
+});
+
+function renderCart(items) {
+    const container = document.createElement("div");
+    container.style.padding = "20px";
+    container.style.fontFamily = "Arial, sans-serif";
+
+    const title = document.createElement("h1");
+    title.textContent = "Your Shopping Cart";
+    container.appendChild(title);
+
+    if (items.length === 0) {
+        const emptyMsg = document.createElement("p");
+        emptyMsg.textContent = "Your cart is empty.";
+        container.appendChild(emptyMsg);
+    } else {
+        items.forEach((item, index) => {
+            const card = document.createElement("div");
+            card.style.display = "flex";
+            card.style.alignItems = "center";
+            card.style.marginBottom = "15px";
+            card.style.padding = "10px";
+            card.style.border = "1px solid #ccc";
+            card.style.borderRadius = "10px";
+            card.style.background = "#fff";
+
+            const img = document.createElement("img");
+            img.src = item.img;
+            img.alt = item.name;
+            img.style.width = "100px";
+            img.style.marginRight = "20px";
+
+            const info = document.createElement("div");
+
+            const name = document.createElement("h3");
+            name.textContent = item.name;
+
+            const price = document.createElement("p");
+            price.textContent = `Price: $${item.price}`;
+
+            const removeBtn = document.createElement("button");
+            removeBtn.textContent = "Remove";
+            removeBtn.style.marginTop = "10px";
+            removeBtn.onclick = () => {
+                removeFromCart(index);
+            };
+
+            info.appendChild(name);
+            info.appendChild(price);
+            info.appendChild(removeBtn);
+
+            card.appendChild(img);
+            card.appendChild(info);
+
+            container.appendChild(card);
+        });
+    }
+
+    document.body.innerHTML = "";
+    document.body.appendChild(container);
+}
+
+function removeFromCart(index) {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart(cart);
+}
+
+
 // === Create Footer ===
 const footer = document.createElement('footer');
 footer.classList.add('footer');
