@@ -51,31 +51,31 @@ cartIcon.appendChild(cartIconImg);
 iconsDiv.appendChild(favoriteIcon);
 iconsDiv.appendChild(cartIcon);
 
-// === Add Menu Icon ===
+// Menu Icon
 const menuButton = document.createElement('button');
 menuButton.classList.add('menu-btn');
 const menuIcon = document.createElement('i');
 menuIcon.classList.add('fas', 'fa-bars');
 menuButton.appendChild(menuIcon);
-iconsDiv.appendChild(menuButton);  // Add the menu button to icons div
+iconsDiv.appendChild(menuButton);
 header.appendChild(iconsDiv);
 
 // === Create Menu Modal ===
 const menuModal = document.createElement('div');
 menuModal.classList.add('menu-modal');
-menuModal.style.display = 'none';  // Initially hidden
+menuModal.style.display = 'none';
 document.body.appendChild(menuModal);
 
-// Add Close Button in the top-right corner
+// Close Button
 const closeButton = document.createElement('button');
 closeButton.classList.add('close-btn');
-closeButton.innerHTML = '&times;';  // '×' symbol for close
+closeButton.innerHTML = '&times;';
 closeButton.onclick = function () {
     menuModal.style.display = 'none';
 };
 menuModal.appendChild(closeButton);
 
-// Links in Modal
+// Modal Links
 const menuLinks = [
     { text: 'About Us', href: '/scr/childPages/aboutUs.html' },
     { text: 'Contact Us', href: '#' },
@@ -94,39 +94,42 @@ menuLinks.forEach(linkObj => {
 });
 menuModal.appendChild(menuList);
 
-// === Toggle Menu Modal Visibility ===
+// Toggle Menu Modal
 menuButton.onclick = function () {
-    if (menuModal.style.display === 'none') {
-        menuModal.style.display = 'block';
-    } else {
-        menuModal.style.display = 'none';
-    }
+    menuModal.style.display = menuModal.style.display === 'none' ? 'block' : 'none';
 };
 
-// === Close Modal on 'Esc' key ===
+// Close on Esc
 document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
         menuModal.style.display = 'none';
     }
 });
 
-// === Close Menu Modal when clicking outside ===
+// Close on Outside Click
 window.addEventListener('click', function (event) {
-    if (menuModal.style.display === 'block' && !menuModal.contains(event.target) && event.target !== menuButton && !menuButton.contains(event.target)) {
+    if (
+        menuModal.style.display === 'block' &&
+        !menuModal.contains(event.target) &&
+        event.target !== menuButton &&
+        !menuButton.contains(event.target)
+    ) {
         menuModal.style.display = 'none';
     }
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    // === Create and render the whole page ===
+    // === Setup ===
     const body = document.body;
     body.style.margin = '0';
     body.style.fontFamily = 'Arial, sans-serif';
 
-    // === Main section ===
+    // === Main Section ===
     const main = document.createElement('main');
     main.id = 'cart-main';
-    main.style.padding = '100px 20px 60px 20px';
+
+    const headerHeight = header.offsetHeight;
+    main.style.padding = `${headerHeight + 20}px 20px 100px 20px`;
 
     // Title
     const heading = document.createElement('h1');
@@ -135,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     heading.style.color = 'white';
     main.appendChild(heading);
 
-    // Product container
+    // Cart Container
     const cartContainer = document.createElement('ul');
     cartContainer.id = 'cartContainer';
     cartContainer.className = 'product-container';
@@ -144,12 +147,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add to body
     body.appendChild(main);
 
-    // === Utility: Get cart items from localStorage ===
+    // === Utilities ===
     function getCartItems() {
         return JSON.parse(localStorage.getItem('cart')) || [];
     }
 
-    // === Render products in cart ===
     function renderCart(cartItems) {
         cartContainer.innerHTML = '';
 
@@ -218,18 +220,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // === Initial render ===
+    // Initial Render
     renderCart(getCartItems());
 });
-
-
 
 // === Create Footer ===
 const footer = document.createElement('footer');
 footer.classList.add('footer');
 document.body.appendChild(footer);
 
-// Social Media Section
+// Social Media
 const socialMedia = document.createElement('div');
 socialMedia.classList.add('social-media');
 
@@ -249,7 +249,7 @@ socials.forEach(s => {
 
 footer.appendChild(socialMedia);
 
-// Footer Links Section
+// Footer Links
 const footerLinks = document.createElement('div');
 footerLinks.classList.add('footer-links');
 
