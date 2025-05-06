@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     main.id = 'cart-main';
 
     const headerHeight = header.offsetHeight;
-    main.style.padding = `${headerHeight + 20}px 20px 100px 20px`;
+    main.style.padding = `${headerHeight + 20}px 20px 300px 20px`;
 
     // Title
     const heading = document.createElement('h1');
@@ -143,9 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
     cartContainer.id = 'cartContainer';
     cartContainer.className = 'product-container';
     main.appendChild(cartContainer);
-
-    // Add to body
-    body.appendChild(main);
 
     // === Utilities ===
     function getCartItems() {
@@ -222,12 +219,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial Render
     renderCart(getCartItems());
+
+    // === Add to Body in Correct Order ===
+    body.appendChild(main); // Append main content first
+    body.appendChild(footer); // Append footer after main content
 });
 
 // === Create Footer ===
 const footer = document.createElement('footer');
 footer.classList.add('footer');
-document.body.appendChild(footer);
 
 // Social Media
 const socialMedia = document.createElement('div');
