@@ -117,78 +117,111 @@ window.addEventListener('click', function (event) {
     }
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    // === Create and render the whole page ===
+    const body = document.body;
+    body.style.margin = '0';
+    body.style.fontFamily = 'Arial, sans-serif';
 
-document.addEventListener("DOMContentLoaded", () => {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    renderCart(cart);
-});
+    // === Main section ===
+    const main = document.createElement('main');
+    main.id = 'cart-main';
+    main.style.padding = '100px 20px 60px 20px';
 
-function renderCart(items) {
-    const container = document.createElement("div");
-    container.style.padding = "20px";
-    container.style.fontFamily = "Arial, sans-serif";
+    // Title
+    const heading = document.createElement('h1');
+    heading.textContent = 'Your Shopping Cart';
+    heading.style.textAlign = 'center';
+    heading.style.color = 'white';
+    main.appendChild(heading);
 
-    const title = document.createElement("h1");
-    title.textContent = "Your Shopping Cart";
-    container.appendChild(title);
+    // Product container
+    const cartContainer = document.createElement('ul');
+    cartContainer.id = 'cartContainer';
+    cartContainer.className = 'product-container';
+    main.appendChild(cartContainer);
 
-    if (items.length === 0) {
-        const emptyMsg = document.createElement("p");
-        emptyMsg.textContent = "Your cart is empty.";
-        container.appendChild(emptyMsg);
-    } else {
-        items.forEach((item, index) => {
-            const card = document.createElement("div");
-            card.style.display = "flex";
-            card.style.alignItems = "center";
-            card.style.marginBottom = "15px";
-            card.style.padding = "10px";
-            card.style.border = "1px solid #ccc";
-            card.style.borderRadius = "10px";
-            card.style.background = "#fff";
+    // Add to body
+    body.appendChild(main);
 
-            const img = document.createElement("img");
-            img.src = item.img;
-            img.alt = item.name;
-            img.style.width = "100px";
-            img.style.marginRight = "20px";
+    // === Utility: Get cart items from localStorage ===
+    function getCartItems() {
+        return JSON.parse(localStorage.getItem('cart')) || [];
+    }
 
-            const info = document.createElement("div");
+    // === Render products in cart ===
+    function renderCart(cartItems) {
+        cartContainer.innerHTML = '';
 
-            const name = document.createElement("h3");
-            name.textContent = item.name;
+        if (cartItems.length === 0) {
+            const emptyMsg = document.createElement('p');
+            emptyMsg.textContent = 'Your cart is empty.';
+            emptyMsg.style.color = 'white';
+            emptyMsg.style.textAlign = 'center';
+            cartContainer.appendChild(emptyMsg);
+            return;
+        }
 
-            const price = document.createElement("p");
-            price.textContent = `Price: $${item.price}`;
+        cartItems.forEach(product => {
+            const item = document.createElement('li');
+            item.classList.add('product-item');
 
-            const removeBtn = document.createElement("button");
-            removeBtn.textContent = "Remove";
-            removeBtn.style.marginTop = "10px";
+            const img = document.createElement('img');
+            img.src = product.img;
+            img.alt = product.name;
+
+            const colorButtons = document.createElement('div');
+            colorButtons.classList.add('color-buttons');
+
+            if (product.colorImages) {
+                Object.keys(product.colorImages).forEach(color => {
+                    const colorButton = document.createElement('button');
+                    colorButton.style.backgroundColor = color;
+                    colorButton.title = color;
+                    colorButton.onclick = () => {
+                        img.src = product.colorImages[color];
+                    };
+                    colorButtons.appendChild(colorButton);
+                });
+            } else if (product.colors) {
+                product.colors.forEach(color => {
+                    const colorButton = document.createElement('button');
+                    colorButton.style.backgroundColor = color;
+                    colorButton.title = color;
+                    colorButtons.appendChild(colorButton);
+                });
+            }
+
+            const price = document.createElement('p');
+            price.classList.add('product-price');
+            price.textContent = `$${product.price}`;
+
+            const btns = document.createElement('div');
+            btns.classList.add('product-buttons');
+
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = 'Remove';
             removeBtn.onclick = () => {
-                removeFromCart(index);
+                const updatedCart = getCartItems().filter(item => item.name !== product.name);
+                localStorage.setItem('cart', JSON.stringify(updatedCart));
+                renderCart(updatedCart);
             };
 
-            info.appendChild(name);
-            info.appendChild(price);
-            info.appendChild(removeBtn);
+            btns.appendChild(removeBtn);
 
-            card.appendChild(img);
-            card.appendChild(info);
+            item.appendChild(img);
+            item.appendChild(price);
+            item.appendChild(colorButtons);
+            item.appendChild(btns);
 
-            container.appendChild(card);
+            cartContainer.appendChild(item);
         });
     }
 
-    document.body.innerHTML = "";
-    document.body.appendChild(container);
-}
+    // === Initial render ===
+    renderCart(getCartItems());
+});
 
-function removeFromCart(index) {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    renderCart(cart);
-}
 
 
 // === Create Footer ===
