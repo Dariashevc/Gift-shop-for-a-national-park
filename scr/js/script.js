@@ -288,7 +288,7 @@ const products = [
     { name: 'Toy wolf', price: 45, img: './scr/images/toy3.jpg', colors: ['grey'] },
     { name: 'Toy hare', price: 40, img: './scr/images/toy4.jpg', colors: ['grey'] },
     {
-        name: 'Tshirt',
+        name: 'T-shirt',
         price: 15,
         img: './scr/images/red-tshirt.jpg',
         colors: ['red', 'blue', 'black', 'grey'],
